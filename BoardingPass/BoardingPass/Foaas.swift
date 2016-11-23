@@ -15,8 +15,9 @@ class Foaas: JSONConvertible, CustomStringConvertible {
     var description: String {
         return "Message: \(message)\nSubtitle: \(subtitle)"
     }
-    
-    let endpoint = "https://www.foaas.com/awesome/louis"
+  
+    // this isn't needed in this class, sorry if the readme was confusing
+    // let endpoint = "https://www.foaas.com/awesome/louis"
     
     init(message: String, subtitle: String) {
         self.message = message
@@ -30,8 +31,7 @@ class Foaas: JSONConvertible, CustomStringConvertible {
     }
     
     func toJson() -> [String : AnyObject] {
-        let json: [String: AnyObject] = ["message" : message as AnyObject,
-                                         "subtitle" : subtitle as AnyObject]
-        return json
+        return [ "message" : message as AnyObject,
+                 "subtitle" : subtitle as AnyObject ]
     }
 }

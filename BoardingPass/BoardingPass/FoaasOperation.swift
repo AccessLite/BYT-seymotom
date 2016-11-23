@@ -13,8 +13,8 @@ import Foundation
 class FoaasOperation: JSONConvertible, DataConvertible {
     let name: String
     let url: String
-    let fields: [[String: AnyObject]]
-    
+    let fields: [[String: AnyObject]] // this should be [FoaasField]
+  
     init(name: String, url: String, fields: [[String: AnyObject]]) {
         self.name = name
         self.url = url
@@ -25,17 +25,18 @@ class FoaasOperation: JSONConvertible, DataConvertible {
         guard let name = json["name"] as? String,
             let url = json["url"] as? String,
         let fieldsArr = json["fields"] as? [[String: AnyObject]] else { return nil }
-        
+      
+        // convert fields to [FoaasField]
         self.init(name: name, url: url, fields: fieldsArr)
     }
     
     func toJson() -> [String : AnyObject] {
-        let json: [String: AnyObject] = ["name": name as AnyObject,
-                                         "url": url as AnyObject,
-                                         "fields": fields as AnyObject]
-        return json
+        return [ "name": name as AnyObject,
+                 "url": url as AnyObject,
+                 "fields": fields as AnyObject ]
     }
-    
+  
+    // error hint: what is returned if your do-block's conditional binding fails?
     convenience required init?(data: Data) {
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
@@ -53,6 +54,8 @@ class FoaasOperation: JSONConvertible, DataConvertible {
     }
     
     func toData() throws -> Data {
+        // this can be written in a single line. consider the following:
+        // should toData() handle the exception, or should the function that calls it?
         let jsonObject = self.toJson()
         
         do {
@@ -62,7 +65,6 @@ class FoaasOperation: JSONConvertible, DataConvertible {
         catch {
             print("error creating queen data: \(error)")
         }
-        
     }
     
     
