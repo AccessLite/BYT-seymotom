@@ -8,14 +8,12 @@
 
 import Foundation
 
-//make this data convertable
-
 class FoaasOperation: JSONConvertible, DataConvertible {
     let name: String
     let url: String
-    let fields: [[String: AnyObject]]
+    let fields: [FoaasField]
     
-    init(name: String, url: String, fields: [[String: AnyObject]]) {
+    init(name: String, url: String, fields: [FoaasField]) {
         self.name = name
         self.url = url
         self.fields = fields
@@ -25,25 +23,23 @@ class FoaasOperation: JSONConvertible, DataConvertible {
         guard let name = json["name"] as? String,
             let url = json["url"] as? String,
         let fieldsArr = json["fields"] as? [[String: AnyObject]] else { return nil }
-        
-        self.init(name: name, url: url, fields: fieldsArr)
+        let foaasFieldArr: [FoaasField] = fieldsArr.flatMap { FoaasField(json: $0) }
+        self.init(name: name, url: url, fields: foaasFieldArr)
     }
     
     func toJson() -> [String : AnyObject] {
-        let json: [String: AnyObject] = ["name": name as AnyObject,
-                                         "url": url as AnyObject,
-                                         "fields": fields as AnyObject]
-        return json
+        return  ["name": name as AnyObject,
+                 "url": url as AnyObject,
+                 "fields": self.fields.map { $0.toJson() } as AnyObject]
     }
     
     convenience required init?(data: Data) {
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
             if let validJson = json {
-                guard let name = validJson["name"] as? String,
-                    let url = validJson["url"] as? String,
-                    let fieldsArr = validJson["fields"] as? [[String: AnyObject]] else { return nil }
-                self.init(name: name, url: url, fields: fieldsArr)
+                self.init(json: validJson)
+            } else {
+                return nil
             }
         }
         catch {
@@ -53,18 +49,6 @@ class FoaasOperation: JSONConvertible, DataConvertible {
     }
     
     func toData() throws -> Data {
-        let jsonObject = self.toJson()
-        
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
-            return jsonData
-        }
-        catch {
-            print("error creating queen data: \(error)")
-        }
-        
+        return try JSONSerialization.data(withJSONObject: self.toJson(), options: [])
     }
-    
-    
-    
 }

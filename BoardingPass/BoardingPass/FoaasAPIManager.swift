@@ -10,6 +10,9 @@ import Foundation
 
 class FoaasAPIManager {
     
+    let endpoint = "https://www.foaas.com/awesome/louis"
+
+    
     private static let defaultSession = URLSession(configuration: .default)
     
     internal class func getFoaas(url: URL, callback: @escaping (Foaas?) -> () ) {
