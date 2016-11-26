@@ -15,7 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if FoaasDataManager.shared.load() == false {
+            FoaasAPIManager.getOperations(callback: { (operations: [FoaasOperation]?) in
+                if let unwrappedOperationsArray = operations {
+                    print(">>>>>>> Got operations array from api...")
+                    dump(unwrappedOperationsArray)
+                    // saves in dataManager.shared.operations
+                    FoaasDataManager.shared.save(operations: unwrappedOperationsArray)
+                }
+            })
+        }
+        else {
+            print(">>>>>> Got operations array from defaults...")
+            dump(FoaasDataManager.shared.operations)
+        }
         return true
     }
 
