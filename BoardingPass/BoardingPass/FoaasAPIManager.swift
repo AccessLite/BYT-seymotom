@@ -12,6 +12,8 @@ class FoaasAPIManager {
     
     let louisFoaasEndpoint = "https://www.foaas.com/awesome/louis"
     
+    static var foaasEndpointURL = URL(string: "https://www.foaas.com/because/Anonymous")!
+    
     
     private static let defaultSession = URLSession(configuration: .default)
     

@@ -10,7 +10,7 @@ import Foundation
 
 class FoaasOperation: JSONConvertible, DataConvertible {
     let name: String
-    let url: String
+    var url: String
     let fields: [FoaasField]
     
     init(name: String, url: String, fields: [FoaasField]) {

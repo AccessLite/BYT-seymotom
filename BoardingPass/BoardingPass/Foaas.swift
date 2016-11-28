@@ -13,7 +13,7 @@ class Foaas: JSONConvertible, CustomStringConvertible {
     internal let subtitle: String
     
     var description: String {
-        return "Message: \(message)\nSubtitle: \(subtitle)"
+        return "\(message)\n\(subtitle)"
     }
         
     init(message: String, subtitle: String) {
@@ -22,9 +22,9 @@ class Foaas: JSONConvertible, CustomStringConvertible {
     }
     
     convenience required init?(json: [String : AnyObject]) {
-        guard let mes = json["message"] as? String,
-            let sub = json["subtitle"] as? String else { return nil }
-        self.init(message: mes, subtitle: sub)
+        guard let message = json["message"] as? String,
+            let subtitle = json["subtitle"] as? String else { return nil }
+        self.init(message: message, subtitle: subtitle)
     }
     
     func toJson() -> [String : AnyObject] {

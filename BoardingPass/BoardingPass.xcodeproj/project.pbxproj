@@ -19,6 +19,7 @@
 		DEE4EC471DE9E85F00063CBE /* FoaasDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC461DE9E85F00063CBE /* FoaasDataManager.swift */; };
 		DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */; };
 		DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */; };
+		DEE4EC511DEB990600063CBE /* OperationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC501DEB990600063CBE /* OperationPreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		DEE4EC461DE9E85F00063CBE /* FoaasDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasDataManager.swift; sourceTree = "<group>"; };
 		DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasViewController.swift; sourceTree = "<group>"; };
 		DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasOperationsTableViewController.swift; sourceTree = "<group>"; };
+		DEE4EC501DEB990600063CBE /* OperationPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationPreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				DE5CBDFA1DE50B5E00C116B2 /* Main.storyboard */,
-				DE5CBDFD1DE50B5E00C116B2 /* Assets.xcassets */,
 				DE5CBDFF1DE50B5E00C116B2 /* LaunchScreen.storyboard */,
+				DE5CBDFD1DE50B5E00C116B2 /* Assets.xcassets */,
 			);
 			name = "UI Stuff";
 			sourceTree = "<group>";
@@ -92,6 +94,7 @@
 			children = (
 				DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */,
 				DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */,
+				DEE4EC501DEB990600063CBE /* OperationPreviewViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */,
 				DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */,
 				DE5CBE0B1DE50C3300C116B2 /* Foaas.swift in Sources */,
+				DEE4EC511DEB990600063CBE /* OperationPreviewViewController.swift in Sources */,
 				DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */,
 				DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */,
 			);
