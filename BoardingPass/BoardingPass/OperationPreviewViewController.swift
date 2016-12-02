@@ -97,6 +97,11 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
      I've seen have the same bugs your code has, but their app will crash - which is not Swift-y.
      
      Well done, and keep at this particular skill.
+     
+     
+     However, this function doesn't keep track of all of the changes for all fields. Tabbing through fields results in the 
+     URL resettign for the other fields. This is a violation of week 1 spec in that you are not returning a fully-formed and 
+     valid URL back to your FoaasViewController. This is a critical bug in terms of MVP.
      */
     func updateTextFields(_ textField: UITextField) {
         // textField text can be non-nil, but still an empty string.
