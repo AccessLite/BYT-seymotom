@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Get used to the idea that you need to always be testing a "first use" case to simulate what would happen the first
+// time a user downloads your app.
 class FoaasDataManager {
     
     static let shared: FoaasDataManager = FoaasDataManager()
@@ -22,6 +24,7 @@ class FoaasDataManager {
     func save(operations: [FoaasOperation]) {
         let operationData:[Data] = operations.flatMap { try? $0.toData() }
         FoaasDataManager.defaults.set(operationData, forKey: FoaasDataManager.operationsKey)
+        FoaasDataManager.shared.operations = operations // need this as well, otherwise on first run no data actually loads in your table view
         print("successfully saved [FoaasOperation]")
     }
     
@@ -38,6 +41,7 @@ class FoaasDataManager {
     
     func deleteStoredOperations() {
         FoaasDataManager.defaults.set(nil, forKey: FoaasDataManager.operationsKey)
+        FoaasDataManager.shared.operations = nil // good practice to also get rid of the data from your manager
     }
     
 }

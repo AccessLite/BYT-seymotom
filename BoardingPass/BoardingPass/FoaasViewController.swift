@@ -8,20 +8,16 @@
 
 import UIKit
 
+// Clean, simple view controller. I like it. 
 class FoaasViewController: UIViewController {
-    
-    
+  
     @IBOutlet weak var messageTextLabel: UILabel!
-    
     @IBOutlet weak var subtitileTextLabel: UILabel!
-    
-    
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         loadFoaas()
         registerForNotifications()
-        // Do any additional setup after loading the view.
     }
     
     func loadFoaas() {
@@ -34,7 +30,8 @@ class FoaasViewController: UIViewController {
             }
         }
     }
-    
+  
+    // MARK: Notifications
     internal func registerForNotifications() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(updateFoaas(sender:)), name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil)

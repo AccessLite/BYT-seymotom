@@ -91,8 +91,18 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         }
     }
     
+    /*
+     It seems you lean towards defensive coding practices, which is frankly a great instinct to have. Your app
+     adverts crashing in several places by using conditional binding and avoiding force-unwraps. All other submissions
+     I've seen have the same bugs your code has, but their app will crash - which is not Swift-y.
+     
+     Well done, and keep at this particular skill.
+     */
     func updateTextFields(_ textField: UITextField) {
-        guard let theText = textField.text else { return }
+        // textField text can be non-nil, but still an empty string.
+        // So you'll get an error if you tab through text fields
+        // without filling them in with text. Making this extra guard check necessary
+        guard let theText = textField.text, theText.characters.count > 0 else { return }
         switch textField {
         case nameTextField:
             let newUri = operation.url.replacingOccurrences(of: ":\(self.operation.fields[0].name.lowercased())", with: theText)
@@ -116,6 +126,7 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         default:
             break
         }
+
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -130,7 +141,7 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
         //pass value foaas back to FoaasVC
-        let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)")
+        let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
         let notification = NotificationCenter.default
         notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
          self.dismiss(animated: true, completion: nil)

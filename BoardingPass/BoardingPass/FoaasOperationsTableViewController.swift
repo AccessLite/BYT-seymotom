@@ -8,37 +8,31 @@
 
 import UIKit
 
+// Convetion can be: 
+// Single line between functions
+// Double line before a MARK
 class FoaasOperationsTableViewController: UITableViewController {
     
     var operations: [FoaasOperation]? = FoaasDataManager.shared.operations
-    
     let operationPreviewSegueIdentifyer = "operationPreviewSegue"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
+  
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return operations?.count ?? 0
+        return operations?.count ?? 0 // well done. the bigger mistake is causing your app to crash (from a UX perspective), but with a nil-coalescing op you effectively prevent it even with your loading/saving bug on first launch
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foaasOperationCell", for: indexPath)
@@ -47,7 +41,6 @@ class FoaasOperationsTableViewController: UITableViewController {
         cell.textLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightBold)
         return cell
     }
-    
 
     @IBAction func didTapDone(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
