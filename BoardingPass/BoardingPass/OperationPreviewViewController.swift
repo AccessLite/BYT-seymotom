@@ -52,6 +52,7 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.updatedURI = operation.url
 
         loadOperation(url: operationEndpoint)
     }
@@ -110,22 +111,22 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         guard let theText = textField.text, theText.characters.count > 0 else { return }
         switch textField {
         case nameTextField:
-            let newUri = operation.url.replacingOccurrences(of: ":\(self.operation.fields[0].name.lowercased())", with: theText)
+            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[0].name.lowercased())", with: theText)
             //I WANT TO SAVE THESE UPDATED URI'S IN THE VIEWCONTROLLER, NOT THE OBJECT.... BUT STRUGGLING
             self.updatedURI = newUri
-            if let newURL = URL(string: "https://www.foaas.com\(newUri)") {
+            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)") {
                 loadOperation(url: newURL)
             }
         case fromTextField:
-            let newUri = operation.url.replacingOccurrences(of: ":\(self.operation.fields[1].name.lowercased())", with: theText)
+            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[1].name.lowercased())", with: theText)
             self.updatedURI = newUri
-            if let newURL = URL(string: "https://www.foaas.com\(newUri)") {
+            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)") {
                 loadOperation(url: newURL)
             }
         case referenceTextField:
-            let newUri = operation.url.replacingOccurrences(of: ":\(self.operation.fields[2].name.lowercased())", with: theText)
+            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[2].name.lowercased())", with: theText)
             self.updatedURI = newUri
-            if let newURL = URL(string: "https://www.foaas.com\(newUri)") {
+            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)") {
                 loadOperation(url: newURL)
             }
         default:
