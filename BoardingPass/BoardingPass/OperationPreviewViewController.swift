@@ -50,11 +50,13 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     @IBOutlet weak var referenceLabel: UILabel!
     @IBOutlet weak var referenceTextField: UITextField!
     
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updatedURI = operation.url
-
         loadOperation(url: operationEndpoint)
+        registerForKeyboardNotifications()
     }
 
     func loadOperation(url: URL) {
@@ -151,6 +153,28 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         let notification = NotificationCenter.default
         notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
          self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    // MARK : KEYBOARD NOTIFICATION
+    
+    func registerForKeyboardNotifications() {
+        // register the notifications here
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+        let keyboardHeight = keyboardSize?.height
+        scrollViewBottomConstraint.constant = keyboardHeight!        
+        print("hello keyboard")
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        scrollViewBottomConstraint.constant = 0
+        print("goodbye keyboard")
     }
     
     

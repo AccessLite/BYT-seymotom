@@ -16,8 +16,8 @@ class FoaasViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFoaas()
         registerForNotifications()
+        loadFoaas()
     }
     
     func loadFoaas() {
@@ -30,6 +30,7 @@ class FoaasViewController: UIViewController {
             }
         }
     }
+    
   
     // MARK: Notifications
     internal func registerForNotifications() {
@@ -45,6 +46,23 @@ class FoaasViewController: UIViewController {
                 loadFoaas()
             }
         }
+    }
+    
+    // MARK: Button Animation
+    
+    
+    @IBAction func octoButtonTapped(_ sender: UIButton) {
+        
+        let newTransform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let originalTransform = sender.imageView!.transform
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            // animate to newTransform
+            sender.transform = newTransform
+            }, completion: { (complete) in
+                // return to original transform
+                sender.transform = originalTransform
+        })
     }
 
 
