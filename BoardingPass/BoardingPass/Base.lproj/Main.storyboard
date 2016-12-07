@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Text label" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="2lq-Kg-Ode">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Text label" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" minimumFontSize="30" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lq-Kg-Ode">
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,6 +42,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2lq-Kg-Ode" secondAttribute="trailing" constant="8" id="2fI-KS-8Zd"/>
                             <constraint firstItem="2lq-Kg-Ode" firstAttribute="top" secondItem="X2D-KT-fCQ" secondAttribute="bottom" constant="8" id="8Bz-jh-may"/>
@@ -52,6 +53,10 @@
                             <constraint firstItem="ZX4-LL-5kS" firstAttribute="centerX" secondItem="tDN-Sc-jpY" secondAttribute="centerX" id="jOf-7Q-jps"/>
                             <constraint firstItem="2lq-Kg-Ode" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" constant="8" id="sLI-3L-MV3"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="gJg-BO-eZe" appends="YES" id="bI9-A2-IG5"/>
+                            <outletCollection property="gestureRecognizers" destination="oqL-Pi-wdm" appends="YES" id="MGN-SS-JcP"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="messageTextLabel" destination="2lq-Kg-Ode" id="9Bk-0W-gYz"/>
@@ -59,6 +64,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVY-Nd-QTr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="gJg-BO-eZe">
+                    <connections>
+                        <action selector="didPressLong:" destination="HzA-Tg-J6o" id="xGX-zu-6aR"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="oqL-Pi-wdm">
+                    <connections>
+                        <action selector="didRecognizeTap:" destination="HzA-Tg-J6o" id="6x6-EY-vxY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-370.39999999999998" y="27.436281859070466"/>
         </scene>
@@ -168,6 +183,7 @@
                                         </connections>
                                     </textField>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="bOc-CH-Ct9" firstAttribute="leading" secondItem="4cW-Bs-NC1" secondAttribute="leading" constant="16" id="0Zh-gJ-Bha"/>
                                     <constraint firstItem="lyk-t5-Yiy" firstAttribute="top" secondItem="LNw-s5-0NJ" secondAttribute="bottom" constant="8" id="2gv-Db-mjR"/>
@@ -189,6 +205,9 @@
                                     <constraint firstItem="y10-iN-372" firstAttribute="centerX" secondItem="4cW-Bs-NC1" secondAttribute="centerX" id="wSp-Vr-Cjc"/>
                                     <constraint firstItem="y10-iN-372" firstAttribute="top" secondItem="lyk-t5-Yiy" secondAttribute="bottom" constant="8" id="ysq-ZL-9gN"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="yWY-Yq-cuV" appends="YES" id="RB2-5H-zwN"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -231,6 +250,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byq-dt-dTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="yWY-Yq-cuV">
+                    <connections>
+                        <action selector="didRecognizeTap:" destination="HgR-37-eqq" id="NmW-B7-jeP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2720.8000000000002" y="23.838080959520241"/>
         </scene>

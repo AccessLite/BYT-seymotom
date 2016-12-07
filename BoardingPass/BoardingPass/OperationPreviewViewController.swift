@@ -57,11 +57,16 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         self.updatedURI = operation.url
         loadOperation(url: operationEndpoint)
         registerForKeyboardNotifications()
+        navigationItem.title = operation.name
+        print(".....................")
+        dump(self.operation)
+        let _ = FoaasPathBuilder(operation: self.operation)
     }
 
     func loadOperation(url: URL) {
         previewTextView.text = operation.name
-        FoaasAPIManager.getFoaas(url: url) { (foaas: Foaas?) in
+
+        FoaasDataManager.getFoaas(url: url) { (foaas: Foaas?) in
             DispatchQueue.main.async {
                 self.previewTextView.text = foaas?.description
                 switch self.operation.fields.count {
@@ -134,7 +139,6 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         default:
             break
         }
-
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -156,7 +160,6 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     }
     
     
-    
     // MARK : KEYBOARD NOTIFICATION
     
     func registerForKeyboardNotifications() {
@@ -175,6 +178,10 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     func keyboardWillHide(notification: NSNotification) {
         scrollViewBottomConstraint.constant = 0
         print("goodbye keyboard")
+    }
+    
+    @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     

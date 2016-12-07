@@ -16,6 +16,7 @@
 		DE5CBE0F1DE50C6000C116B2 /* FoaasField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE0E1DE50C6000C116B2 /* FoaasField.swift */; };
 		DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE121DE50D4D00C116B2 /* FoaasAPIManager.swift */; };
 		DE5CBE161DE517F200C116B2 /* FoaasProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */; };
+		DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */; };
 		DEE4EC471DE9E85F00063CBE /* FoaasDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC461DE9E85F00063CBE /* FoaasDataManager.swift */; };
 		DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */; };
 		DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */; };
@@ -34,6 +35,7 @@
 		DE5CBE0E1DE50C6000C116B2 /* FoaasField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasField.swift; sourceTree = "<group>"; };
 		DE5CBE121DE50D4D00C116B2 /* FoaasAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasAPIManager.swift; sourceTree = "<group>"; };
 		DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasProtocols.swift; sourceTree = "<group>"; };
+		DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasPathBuilder.swift; sourceTree = "<group>"; };
 		DEE4EC461DE9E85F00063CBE /* FoaasDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FoaasDataManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FoaasViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FoaasOperationsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -106,6 +108,7 @@
 				DE5CBE0C1DE50C4F00C116B2 /* FoaasOperation.swift */,
 				DE5CBE0E1DE50C6000C116B2 /* FoaasField.swift */,
 				DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */,
+				DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */,
 				DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */,
 				DE5CBE0B1DE50C3300C116B2 /* Foaas.swift in Sources */,
+				DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */,
 				DEE4EC511DEB990600063CBE /* OperationPreviewViewController.swift in Sources */,
 				DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */,
 				DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */,

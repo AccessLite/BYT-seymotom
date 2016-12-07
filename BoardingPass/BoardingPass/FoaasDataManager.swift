@@ -13,14 +13,36 @@ import Foundation
 class FoaasDataManager {
     
     static let shared: FoaasDataManager = FoaasDataManager()
+    
     private static let operationsKey: String = "FoaasOperationsKey"
     private static let defaults = UserDefaults.standard
     internal private(set) var operations: [FoaasOperation]?
+    
+    static var foaasEndpointURL = URL(string: "https://www.foaas.com/because/Anonymous")!
     
     private init() {}
     
     
     //MARK: Methods
+    
+    internal func requestOperations(_ operations: @escaping ([FoaasOperation]?) -> Void) {
+        if FoaasDataManager.shared.load() == false {
+            FoaasAPIManager.getOperations(callback: { (operations: [FoaasOperation]?) in
+                if let unwrappedOperationsArray = operations {
+                    print(">>>>>>> Got operations array from api...")
+                    dump(unwrappedOperationsArray)
+                    // saves in dataManager.shared.operations
+                    FoaasDataManager.shared.save(operations: unwrappedOperationsArray)
+                }
+            })
+        }
+        else {
+            print(">>>>>> Got operations array from defaults...")
+            dump(FoaasDataManager.shared.operations)
+        }
+    }
+    
+    
     func save(operations: [FoaasOperation]) {
         let operationData:[Data] = operations.flatMap { try? $0.toData() }
         FoaasDataManager.defaults.set(operationData, forKey: FoaasDataManager.operationsKey)
@@ -43,5 +65,16 @@ class FoaasDataManager {
         FoaasDataManager.defaults.set(nil, forKey: FoaasDataManager.operationsKey)
         FoaasDataManager.shared.operations = nil // good practice to also get rid of the data from your manager
     }
+    
+    internal class func getFoaas(url: URL, completionHandler: @escaping (Foaas?) -> () ) {
+        FoaasAPIManager.getFoaas(url: url) { (thisFoaas) in
+            if thisFoaas != nil {
+                completionHandler(thisFoaas)
+            }
+        }
+    }
+    
+    
+    
     
 }

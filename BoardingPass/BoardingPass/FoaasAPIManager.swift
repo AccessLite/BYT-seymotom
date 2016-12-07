@@ -14,7 +14,6 @@ class FoaasAPIManager {
     
     static var foaasEndpointURL = URL(string: "https://www.foaas.com/because/Anonymous")!
     
-    
     private static let defaultSession = URLSession(configuration: .default)
     
     internal class func getFoaas(url: URL, callback: @escaping (Foaas?) -> () ) {
