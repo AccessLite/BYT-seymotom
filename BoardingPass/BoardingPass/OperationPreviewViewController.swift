@@ -28,17 +28,19 @@ import UIKit
 class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     //MARK: Properties
+    private let foaasBaseUrl = "https://www.foaas.com"
     var operation: FoaasOperation!
+    private var pathBuilder: FoaasPathBuilder?
     
-    var uri: String {
+    private var uri: String {
         return operation.url
     }
     
     var operationEndpoint: URL {
-        return URL(string: "https://www.foaas.com\(uri)")!
+        return URL(string: foaasBaseUrl + uri)!
     }
     
-    private var updatedURI = ""
+    //private var updatedURI = ""
     
     //MARK: Outlets
     
@@ -54,13 +56,11 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.updatedURI = operation.url
-        loadOperation(url: operationEndpoint)
-        registerForKeyboardNotifications()
         navigationItem.title = operation.name
-        print(".....................")
-        dump(self.operation)
-        let _ = FoaasPathBuilder(operation: self.operation)
+        self.pathBuilder = FoaasPathBuilder(operation: self.operation)
+        //self.updatedURI = operation.url
+        registerForKeyboardNotifications()
+        loadOperation(url: operationEndpoint)
     }
 
     func loadOperation(url: URL) {
@@ -69,28 +69,29 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         FoaasDataManager.getFoaas(url: url) { (foaas: Foaas?) in
             DispatchQueue.main.async {
                 self.previewTextView.text = foaas?.description
+                guard let fieldKeys: [String] = (self.pathBuilder?.allKeys()) else { return }
                 switch self.operation.fields.count {
                 case 1:
-                    self.nameLabel.text = "<\(self.operation.fields[0].name.lowercased())>"
-                    self.nameTextField.placeholder = "\(self.operation.fields[0].name.lowercased())"
+                    self.nameLabel.text = "<\(fieldKeys[0])>"
+                    self.nameTextField.placeholder = fieldKeys[0]
                     self.fromLabel.isHidden = true
                     self.fromTextField.isHidden = true
                     self.referenceLabel.isHidden = true
                     self.referenceTextField.isHidden = true
                 case 2:
-                    self.nameLabel.text = "<\(self.operation.fields[0].name.lowercased())>"
-                    self.nameTextField.placeholder = "\(self.operation.fields[0].name.lowercased())"
-                    self.fromLabel.text = "<\(self.operation.fields[1].name.lowercased())>"
-                    self.fromTextField.placeholder = "\(self.operation.fields[1].name.lowercased())"
+                    self.nameLabel.text = "<\(fieldKeys[0])>"
+                    self.nameTextField.placeholder = fieldKeys[0]
+                    self.fromLabel.text = "<\(fieldKeys[1])>"
+                    self.fromTextField.placeholder = "\(fieldKeys[1])"
                     self.referenceLabel.isHidden = true
                     self.referenceTextField.isHidden = true
                 case 3:
-                    self.nameLabel.text = "<\(self.operation.fields[0].name.lowercased())>"
-                    self.nameTextField.placeholder = "\(self.operation.fields[0].name.lowercased())"
-                    self.fromLabel.text = "<\(self.operation.fields[1].name.lowercased())>"
-                    self.fromTextField.placeholder = "\(self.operation.fields[1].name.lowercased())"
-                    self.referenceLabel.text = "<\(self.operation.fields[2].name.lowercased())>"
-                    self.referenceTextField.placeholder = "\(self.operation.fields[2].name.lowercased())"
+                    self.nameLabel.text = "<\(fieldKeys[0])>"
+                    self.nameTextField.placeholder = fieldKeys[0]
+                    self.fromLabel.text = "<\(fieldKeys[1])>"
+                    self.fromTextField.placeholder = "\(fieldKeys[1])"
+                    self.referenceLabel.text = "<\(fieldKeys[2])>"
+                    self.referenceTextField.placeholder = "\(fieldKeys[2])"
                 default:
                     print("fields array out of range")
                     break
@@ -99,61 +100,45 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         }
     }
     
-    /*
-     It seems you lean towards defensive coding practices, which is frankly a great instinct to have. Your app
-     adverts crashing in several places by using conditional binding and avoiding force-unwraps. All other submissions
-     I've seen have the same bugs your code has, but their app will crash - which is not Swift-y.
-     
-     Well done, and keep at this particular skill.
-     
-     
-     However, this function doesn't keep track of all of the changes for all fields. Tabbing through fields results in the 
-     URL resettign for the other fields. This is a violation of week 1 spec in that you are not returning a fully-formed and 
-     valid URL back to your FoaasViewController. This is a critical bug in terms of MVP.
-     */
-    func updateTextFields(_ textField: UITextField) {
-        // textField text can be non-nil, but still an empty string.
-        // So you'll get an error if you tab through text fields
-        // without filling them in with text. Making this extra guard check necessary
+    func textFieldWasEdited(_ textField: UITextField) {
+        guard let fieldKeys: [String] = (self.pathBuilder?.allKeys()) else { return }
         guard let theText = textField.text, theText.characters.count > 0 else { return }
         switch textField {
         case nameTextField:
-            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[0].name.lowercased())", with: theText)
-            //I WANT TO SAVE THESE UPDATED URI'S IN THE VIEWCONTROLLER, NOT THE OBJECT.... BUT STRUGGLING
-            self.updatedURI = newUri
-            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)") {
-                loadOperation(url: newURL)
-            }
+//            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[0].name.lowercased())", with: theText)
+//            self.updatedURI = newUri
+//            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI) {
+//                loadOperation(url: newURL)
+//            }
+            self.pathBuilder?.update(key: fieldKeys[0], value: theText)
+//            if let newURL = URL(string: self.foaasBaseUrl + self.pathBuilder!.build()) {
+//                loadOperation(url: newURL)
+//            }
         case fromTextField:
-            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[1].name.lowercased())", with: theText)
-            self.updatedURI = newUri
-            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)") {
-                loadOperation(url: newURL)
-            }
+            self.pathBuilder?.update(key: fieldKeys[1], value: theText)
         case referenceTextField:
-            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[2].name.lowercased())", with: theText)
-            self.updatedURI = newUri
-            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)") {
-                loadOperation(url: newURL)
-            }
+            self.pathBuilder?.update(key: fieldKeys[2], value: theText)
         default:
             break
+        }
+        if let newURL = URL(string: self.foaasBaseUrl + self.pathBuilder!.build()) {
+            loadOperation(url: newURL)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        updateTextFields(textField)
+        textFieldWasEdited(textField)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        updateTextFields(textField)
+        textFieldWasEdited(textField)
         return true
     }
     
     
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
         //pass value foaas back to FoaasVC
-        let newURL = URL(string: "https://www.foaas.com\(self.updatedURI)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
+        let newURL = URL(string: "https://www.foaas.com\(self.pathBuilder!.build())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
         let notification = NotificationCenter.default
         notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
          self.dismiss(animated: true, completion: nil)
@@ -172,12 +157,10 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
         let keyboardHeight = keyboardSize?.height
         scrollViewBottomConstraint.constant = keyboardHeight!        
-        print("hello keyboard")
     }
     
     func keyboardWillHide(notification: NSNotification) {
         scrollViewBottomConstraint.constant = 0
-        print("goodbye keyboard")
     }
     
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {

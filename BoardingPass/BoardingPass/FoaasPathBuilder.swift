@@ -42,9 +42,7 @@ class FoaasPathBuilder {
      */
     init(operation: FoaasOperation) {
         var fieldDict: [String: String] = [:]
-        _ = operation.fields.flatMap { fieldDict[$0.field] = "field" }
-        print(">>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<")
-        dump(fieldDict)
+        _ = operation.fields.flatMap { fieldDict[$0.field] = ":\($0.field)" }
         self.operation = operation
         self.operationFields = fieldDict
     }

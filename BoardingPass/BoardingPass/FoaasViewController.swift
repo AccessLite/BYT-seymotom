@@ -38,7 +38,7 @@ class FoaasViewController: UIViewController {
 
         
         //APIMANAGERCALL
-//        FoaasAPIManager.getFoaas(url: FoaasAPIManager.foaasEndpointURL) { (thisFoaas) in
+//        FoaasDataManager.getFoaas(url: FoaasAPIManager.foaasEndpointURL) { (thisFoaas) in
 //            if thisFoaas != nil {
 //                self.foaasMessageString = "\(thisFoaas!.message) (thisFoaas!.subtitle)"
 //                DispatchQueue.main.async {
@@ -70,27 +70,30 @@ class FoaasViewController: UIViewController {
     
     // MARK: Long Press Screenshot
     
+    
     @IBAction func didPressLong(_ sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.began {
-            // write some code to take a screenshot
             // Start the context
             UIGraphicsBeginImageContext(self.view.frame.size)
-            // we are going to use context in a couple of places
             // Draw the view into the context (this is the snapshot)
             view.layer.render(in: UIGraphicsGetCurrentContext()!)
             let snapshot = UIGraphicsGetImageFromCurrentImageContext()
-            
             // End the context (this is required to not leak resources)
             UIGraphicsEndImageContext()
-            
             // Save to photos
             if let unwrappedSnapshot = snapshot {
-                UIImageWriteToSavedPhotosAlbum(unwrappedSnapshot, nil, nil, nil)
-                showAlertView(message: "Screenshot saved sucessfully")
-            } else {
-                showAlertView(message: "Screenshot failed to save")
+                UIImageWriteToSavedPhotosAlbum(unwrappedSnapshot, self, #selector(createScreenShotCompletion(image:didFinishSavingWithError:contextInfo:)), nil)
             }
             print("Screenshot")
+        }
+    }
+    
+    internal func createScreenShotCompletion(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: UnsafeMutableRawPointer?) {
+        if let _ = didFinishSavingWithError {
+            showAlertView(message: "Screenshot failed to save")
+        }
+        else {
+            showAlertView(message: "Screenshot saved sucessfully")
         }
     }
     
@@ -117,10 +120,8 @@ class FoaasViewController: UIViewController {
     // MARK: Button Animation
     
     @IBAction func octoButtonTapped(_ sender: UIButton) {
-        
         let newTransform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         let originalTransform = sender.imageView!.transform
-        
         UIView.animate(withDuration: 0.1, animations: {
             // animate to newTransform
             sender.transform = newTransform
