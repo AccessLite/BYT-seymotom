@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Text label" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" minimumFontSize="30" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lq-Kg-Ode">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Text label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="2lq-Kg-Ode">
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                                     <segue destination="WK0-t6-Apa" kind="presentation" identifier="operationsSegue" id="ehR-CE-3Uf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle Text Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO0-S2-EbH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Subtitle Text Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO0-S2-EbH">
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                             <constraint firstItem="SO0-S2-EbH" firstAttribute="top" secondItem="2lq-Kg-Ode" secondAttribute="bottom" constant="8" id="J6Z-Da-gf6"/>
                             <constraint firstAttribute="trailing" secondItem="SO0-S2-EbH" secondAttribute="trailing" constant="8" id="Qra-9b-MPw"/>
                             <constraint firstItem="SO0-S2-EbH" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" constant="8" id="Y2h-ip-Vo0"/>
+                            <constraint firstItem="ZX4-LL-5kS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SO0-S2-EbH" secondAttribute="bottom" constant="8" id="cYl-lo-HdC"/>
                             <constraint firstItem="ZX4-LL-5kS" firstAttribute="centerX" secondItem="tDN-Sc-jpY" secondAttribute="centerX" id="jOf-7Q-jps"/>
                             <constraint firstItem="2lq-Kg-Ode" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" constant="8" id="sLI-3L-MV3"/>
                         </constraints>
@@ -90,7 +91,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNG-b4-VKI" id="TRv-Pi-f6v">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>

@@ -10,6 +10,11 @@ import Foundation
 
 // Get used to the idea that you need to always be testing a "first use" case to simulate what would happen the first
 // time a user downloads your app.
+
+enum FoulLanguageFilter {
+    case isOn, isOff
+}
+
 class FoaasDataManager {
     
     static let shared: FoaasDataManager = FoaasDataManager()
@@ -17,6 +22,8 @@ class FoaasDataManager {
     private static let operationsKey: String = "FoaasOperationsKey"
     private static let defaults = UserDefaults.standard
     internal private(set) var operations: [FoaasOperation]?
+    
+    var filter: FoulLanguageFilter = .isOn
     
     static var foaasEndpointURL = URL(string: "https://www.foaas.com/because/Anonymous")!
     

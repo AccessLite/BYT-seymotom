@@ -40,8 +40,6 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         return URL(string: foaasBaseUrl + uri)!
     }
     
-    //private var updatedURI = ""
-    
     //MARK: Outlets
     
     @IBOutlet weak var previewTextView: UITextView!
@@ -56,19 +54,16 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = operation.name
+        navigationItem.title = operation.name.filteredIfFilteringIsOn()
         self.pathBuilder = FoaasPathBuilder(operation: self.operation)
-        //self.updatedURI = operation.url
         registerForKeyboardNotifications()
         loadOperation(url: operationEndpoint)
     }
 
     func loadOperation(url: URL) {
-        previewTextView.text = operation.name
-
         FoaasDataManager.getFoaas(url: url) { (foaas: Foaas?) in
             DispatchQueue.main.async {
-                self.previewTextView.text = foaas?.description
+                self.previewTextView.text = foaas?.description.filteredIfFilteringIsOn()
                 guard let fieldKeys: [String] = (self.pathBuilder?.allKeys()) else { return }
                 switch self.operation.fields.count {
                 case 1:
@@ -105,15 +100,7 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         guard let theText = textField.text, theText.characters.count > 0 else { return }
         switch textField {
         case nameTextField:
-//            let newUri = updatedURI.replacingOccurrences(of: ":\(self.operation.fields[0].name.lowercased())", with: theText)
-//            self.updatedURI = newUri
-//            if let newURL = URL(string: "https://www.foaas.com\(self.updatedURI) {
-//                loadOperation(url: newURL)
-//            }
             self.pathBuilder?.update(key: fieldKeys[0], value: theText)
-//            if let newURL = URL(string: self.foaasBaseUrl + self.pathBuilder!.build()) {
-//                loadOperation(url: newURL)
-//            }
         case fromTextField:
             self.pathBuilder?.update(key: fieldKeys[1], value: theText)
         case referenceTextField:
@@ -136,8 +123,8 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     }
     
     
+    //passes foaas back to FoaasVC
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
-        //pass value foaas back to FoaasVC
         let newURL = URL(string: "https://www.foaas.com\(self.pathBuilder!.build())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
         let notification = NotificationCenter.default
         notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])

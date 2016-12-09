@@ -36,8 +36,7 @@ class FoaasOperationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foaasOperationCell", for: indexPath)
-
-        cell.textLabel?.text = operations?[indexPath.row].name
+        cell.textLabel?.text = operations?[indexPath.row].name.filteredIfFilteringIsOn()
         cell.textLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightBold)
         return cell
     }
