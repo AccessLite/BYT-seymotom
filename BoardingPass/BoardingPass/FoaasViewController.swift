@@ -16,6 +16,8 @@ class FoaasViewController: UIViewController {
   
     private var foaasMessageString: String!
     
+    //let foulLanguageManager = FoulLanguageManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerForNotifications()
@@ -30,23 +32,11 @@ class FoaasViewController: UIViewController {
             if thisFoaas != nil {
                 self.foaasMessageString = "\(thisFoaas!.message) (thisFoaas!.subtitle)"
                 DispatchQueue.main.async {
-                    self.messageTextLabel.text = thisFoaas!.message
-                    self.subtitileTextLabel.text = thisFoaas!.subtitle
+                    self.messageTextLabel.text = thisFoaas!.message.filteredIfFilteringIsOn()
+                    self.subtitileTextLabel.text = thisFoaas!.subtitle.filteredIfFilteringIsOn()
                 }
             }
         }
-
-        
-        //APIMANAGERCALL
-//        FoaasDataManager.getFoaas(url: FoaasAPIManager.foaasEndpointURL) { (thisFoaas) in
-//            if thisFoaas != nil {
-//                self.foaasMessageString = "\(thisFoaas!.message) (thisFoaas!.subtitle)"
-//                DispatchQueue.main.async {
-//                    self.messageTextLabel.text = thisFoaas!.message
-//                    self.subtitileTextLabel.text = thisFoaas!.subtitle
-//                }
-//            }
-//        }
     }
     
   
