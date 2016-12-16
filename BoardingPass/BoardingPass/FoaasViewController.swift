@@ -30,7 +30,7 @@ class FoaasViewController: UIViewController {
     func loadFoaas() {
         FoaasDataManager.getFoaas(url: FoaasDataManager.foaasEndpointURL) { (thisFoaas) in
             if thisFoaas != nil {
-                self.foaasMessageString = "\(thisFoaas!.message) (thisFoaas!.subtitle)"
+                self.foaasMessageString = "\(thisFoaas!.message) \(thisFoaas!.subtitle)"
                 DispatchQueue.main.async {
                     self.messageTextLabel.text = thisFoaas!.message.filteredIfFilteringIsOn()
                     self.subtitileTextLabel.text = thisFoaas!.subtitle.filteredIfFilteringIsOn()
