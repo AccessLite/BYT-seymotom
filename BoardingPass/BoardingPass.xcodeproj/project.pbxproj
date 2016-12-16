@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE35F2B61DFAFB2900F1D161 /* FoulLanguageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35F2B51DFAFB2900F1D161 /* FoulLanguageFilter.swift */; };
 		DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBDF61DE50B5E00C116B2 /* AppDelegate.swift */; };
 		DE5CBDFC1DE50B5E00C116B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE5CBDFA1DE50B5E00C116B2 /* Main.storyboard */; };
 		DE5CBDFE1DE50B5E00C116B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE5CBDFD1DE50B5E00C116B2 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 		DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE121DE50D4D00C116B2 /* FoaasAPIManager.swift */; };
 		DE5CBE161DE517F200C116B2 /* FoaasProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */; };
 		DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */; };
+		DEC221931DFB2E51005B1BD7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC221921DFB2E51005B1BD7 /* String+Extension.swift */; };
 		DEE4EC471DE9E85F00063CBE /* FoaasDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC461DE9E85F00063CBE /* FoaasDataManager.swift */; };
 		DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */; };
 		DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */; };
@@ -24,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE35F2B51DFAFB2900F1D161 /* FoulLanguageFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoulLanguageFilter.swift; sourceTree = "<group>"; };
 		DE5CBDF31DE50B5E00C116B2 /* BoardingPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardingPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5CBDF61DE50B5E00C116B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE5CBDFB1DE50B5E00C116B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		DE5CBE121DE50D4D00C116B2 /* FoaasAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasAPIManager.swift; sourceTree = "<group>"; };
 		DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasProtocols.swift; sourceTree = "<group>"; };
 		DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasPathBuilder.swift; sourceTree = "<group>"; };
+		DEC221921DFB2E51005B1BD7 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		DEE4EC461DE9E85F00063CBE /* FoaasDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FoaasDataManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FoaasViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FoaasOperationsTableViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -109,6 +113,8 @@
 				DE5CBE0E1DE50C6000C116B2 /* FoaasField.swift */,
 				DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */,
 				DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */,
+				DE35F2B51DFAFB2900F1D161 /* FoulLanguageFilter.swift */,
+				DEC221921DFB2E51005B1BD7 /* String+Extension.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -209,11 +215,13 @@
 				DE5CBE0F1DE50C6000C116B2 /* FoaasField.swift in Sources */,
 				DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */,
 				DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */,
+				DEC221931DFB2E51005B1BD7 /* String+Extension.swift in Sources */,
 				DE5CBE0B1DE50C3300C116B2 /* Foaas.swift in Sources */,
 				DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */,
 				DEE4EC511DEB990600063CBE /* OperationPreviewViewController.swift in Sources */,
 				DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */,
 				DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */,
+				DE35F2B61DFAFB2900F1D161 /* FoulLanguageFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
