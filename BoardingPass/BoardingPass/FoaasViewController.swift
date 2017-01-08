@@ -16,8 +16,6 @@ class FoaasViewController: UIViewController {
   
     private var foaasMessageString: String!
     
-    //let foulLanguageManager = FoulLanguageManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerForNotifications()
@@ -60,7 +58,6 @@ class FoaasViewController: UIViewController {
     
     // MARK: Long Press Screenshot
     
-    
     @IBAction func didPressLong(_ sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.began {
             // Start the context
@@ -78,6 +75,13 @@ class FoaasViewController: UIViewController {
         }
     }
     
+    // command + option + /
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - image: <#image description#>
+    ///   - didFinishSavingWithError: <#didFinishSavingWithError description#>
+    ///   - contextInfo: <#contextInfo description#>
     internal func createScreenShotCompletion(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: UnsafeMutableRawPointer?) {
         if let _ = didFinishSavingWithError {
             showAlertView(message: "Screenshot failed to save")

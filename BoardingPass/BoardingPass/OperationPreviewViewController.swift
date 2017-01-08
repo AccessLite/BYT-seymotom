@@ -50,6 +50,12 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     @IBOutlet weak var referenceLabel: UILabel!
     @IBOutlet weak var referenceTextField: UITextField!
     
+    
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var selectButton: UIButton!
+    
+    @IBOutlet weak var textFieldView: UIView!
+    
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -121,6 +127,22 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         textFieldWasEdited(textField)
         return true
     }
+    
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        if let navVc = navigationController {
+            navVc.popViewController(animated: true)
+        }
+    }
+    
+    @IBAction func selectButtonPressed(_ sender: UIButton) {
+        let newURL = URL(string: "https://www.foaas.com\(self.pathBuilder!.build())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
+        let notification = NotificationCenter.default
+        notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+   
     
     
     //passes foaas back to FoaasVC

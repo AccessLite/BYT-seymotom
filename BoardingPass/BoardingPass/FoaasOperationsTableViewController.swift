@@ -45,6 +45,9 @@ class FoaasOperationsTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == operationPreviewSegueIdentifyer {
             if let operationPreviewVC = segue.destination as? OperationPreviewViewController {
