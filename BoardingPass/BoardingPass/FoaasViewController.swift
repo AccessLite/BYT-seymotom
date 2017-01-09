@@ -28,7 +28,8 @@ class FoaasViewController: UIViewController {
     func loadFoaas() {
         FoaasDataManager.getFoaas(url: FoaasDataManager.foaasEndpointURL) { (thisFoaas) in
             if thisFoaas != nil {
-                self.foaasMessageString = "\(thisFoaas!.message) (thisFoaas!.subtitle)"
+               self.foaasMessageString = "\(thisFoaas!.message) \(thisFoaas!.subtitle)"
+                print(">>>" + self.foaasMessageString)
                 DispatchQueue.main.async {
                     self.messageTextLabel.text = thisFoaas!.message.filteredIfFilteringIsOn()
                     self.subtitileTextLabel.text = thisFoaas!.subtitle.filteredIfFilteringIsOn()
@@ -47,10 +48,23 @@ class FoaasViewController: UIViewController {
     
     internal func updateFoaas(sender: Notification) {
         // parse out sender.userInfo as needed
+        
+        
         if let notificationBundle = sender.userInfo {
-            if let newURL = notificationBundle["url"] as? URL {
-                FoaasDataManager.foaasEndpointURL = newURL
-                loadFoaas()
+//            if let newURL = notificationBundle["url"] as? URL {
+//                FoaasDataManager.foaasEndpointURL = newURL
+//                loadFoaas()
+//            }
+            if let newMessageString = notificationBundle["message"] as? String {
+                var splitMessage = newMessageString.components(separatedBy: "-")
+                if let subtitle = splitMessage.popLast() {
+                    print("Subtitle:  -\(subtitle)")
+                    let message = splitMessage.reduce("", { $0 == "" ? $1 : $0 + "-" + $1 })
+                    print("Message:  \(message)")
+                    
+                    self.messageTextLabel.text = message.filteredIfFilteringIsOn()
+                    self.subtitileTextLabel.text = "-" + subtitle.filteredIfFilteringIsOn()
+                }
             }
         }
     }
