@@ -60,6 +60,9 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     
     @IBOutlet weak var textFieldView: UIView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -197,18 +200,45 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     func registerForKeyboardNotifications() {
         // register the notifications here
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
+    
+    
+    func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset = UIEdgeInsets.zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        }
+        
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+    
     
     func keyboardWillShow(notification: NSNotification) {
         let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
         let keyboardHeight = keyboardSize?.height
-        scrollViewBottomConstraint.constant = keyboardHeight!        
+        scrollViewBottomConstraint.constant = keyboardHeight!
     }
     
     func keyboardWillHide(notification: NSNotification) {
         scrollViewBottomConstraint.constant = 0
     }
+    
+    
+    
     
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)

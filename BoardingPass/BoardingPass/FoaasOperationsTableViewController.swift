@@ -11,20 +11,65 @@ import UIKit
 // Convetion can be: 
 // Single line between functions
 // Double line before a MARK
+
+/*
+ Top of the file:
+ var floatingButton: UIButton = UIButton()
+ 
+ In viewDidLoad:
+ //Set Up Floating Button
+ self.floatingButton = UIButton(type: .custom)
+ self.floatingButton.addTarget(self, action: #selector(floatingButtonClicked), for: UIControlEvents.touchUpInside)
+ self.view.addSubview(floatingButton)
+ 
+ //Functions
+ override func viewWillLayoutSubviews() {
+ floatingButton.clipsToBounds = true
+ floatingButton.setImage(#imageLiteral(resourceName: "Close Button"), for: .normal)
+ 
+ floatingButton.translatesAutoresizingMaskIntoConstraints = false
+ let _ = [
+ floatingButton.trailingAnchor.constraint(equalTo: (tableView.superview?.trailingAnchor)!, constant: -30.0),
+ floatingButton.bottomAnchor.constraint(equalTo: (tableView.superview?.bottomAnchor)!, constant: -30.0),
+ floatingButton.widthAnchor.constraint(equalToConstant: 50.0),
+ floatingButton.heightAnchor.constraint(equalToConstant: 54.0)
+ ].map { $0.isActive = true }
+ }
+ 
+ func floatingButtonClicked() {
+ dismiss(animated: true, completion: nil)
+ }
+ */
+
 class FoaasOperationsTableViewController: UITableViewController {
     
     var operations: [FoaasOperation]? = FoaasDataManager.shared.operations
     let operationPreviewSegueIdentifyer = "operationPreviewSegue"
+    
+    var floatingButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(floatingButtonClicked), for: UIControlEvents.touchUpInside)
+        button.clipsToBounds = true
+        button.setImage(#imageLiteral(resourceName: "Close Button"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(floatingButton)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        let _ = [
+            floatingButton.trailingAnchor.constraint(equalTo: (tableView.superview?.trailingAnchor)!, constant: -20.0),
+            floatingButton.bottomAnchor.constraint(equalTo: (tableView.superview?.bottomAnchor)!, constant: -20.0),
+            floatingButton.widthAnchor.constraint(equalToConstant: 60.0),
+            floatingButton.heightAnchor.constraint(equalToConstant: 60.0)
+            ].map { $0.isActive = true }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-  
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -59,6 +104,11 @@ class FoaasOperationsTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    
+    func floatingButtonClicked() {
+        dismiss(animated: true, completion: nil)
     }
    
 }

@@ -98,7 +98,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNG-b4-VKI" id="TRv-Pi-f6v">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -305,6 +305,7 @@
                         <outlet property="previewTextView" destination="Xcd-al-jCN" id="DKf-r9-YnQ"/>
                         <outlet property="referenceLabel" destination="y10-iN-372" id="xIG-xX-i6x"/>
                         <outlet property="referenceTextField" destination="0p3-Eb-vxB" id="Tsz-Uw-BTF"/>
+                        <outlet property="scrollView" destination="4cW-Bs-NC1" id="qCP-90-gaI"/>
                         <outlet property="scrollViewBottomConstraint" destination="Eih-YI-E4Q" id="hCH-Eb-eZ2"/>
                         <outlet property="selectButton" destination="r2Y-LJ-ScL" id="AwH-Ve-Ob9"/>
                         <outlet property="textFieldView" destination="YTM-Nr-rFW" id="B2y-uP-HLI"/>
@@ -322,7 +323,6 @@
         <!--Navigation Controller-->
         <scene sceneID="khs-ua-0Pg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kfO-ka-JnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WK0-t6-Apa" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aWf-eK-3cV">
@@ -334,6 +334,7 @@
                         <segue destination="cM2-D5-BLp" kind="relationship" relationship="rootViewController" id="pv1-rG-XG3"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kfO-ka-JnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="870" y="24"/>
         </scene>
