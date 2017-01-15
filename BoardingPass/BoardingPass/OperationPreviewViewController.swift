@@ -174,70 +174,95 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     }
     
     @IBAction func selectButtonPressed(_ sender: UIButton) {
-//        let newURL = URL(string: "https://www.foaas.com\(self.pathBuilder!.build())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
         let notification = NotificationCenter.default
-//        notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
-        
         // send the message back too the foaas view controller as a string. Fix that shit.
         notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["message": newFoaasMessageText])
 
-        self.dismiss(animated: true, completion: nil)
+        if let navVC = navigationController {
+            navVC.popToRootViewController(animated: true)
+        }
     }
    
-    
-    
-    //passes foaas back to FoaasVC
-    @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
-        let newURL = URL(string: "https://www.foaas.com\(self.pathBuilder!.build())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
-        let notification = NotificationCenter.default
-        notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
-         self.dismiss(animated: true, completion: nil)
-    }
-    
+
     
     // MARK : KEYBOARD NOTIFICATION
     
+//    func registerForKeyboardNotifications() {
+//        // register the notifications here
+////        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+////        
+////        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+//
+//        
+////        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+////        
+////        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+//    }
+    
+    
+//    func adjustForKeyboard(notification: Notification) {
+//        let userInfo = notification.userInfo!
+//        
+//        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+//        
+//        if notification.name == Notification.Name.UIKeyboardWillHide {
+//            scrollView.contentInset = UIEdgeInsets.zero
+//        } else {
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+//        }
+//        
+//        scrollView.scrollIndicatorInsets = scrollView.contentInset
+//    }
+    
+    //    func keyboardWillShow(notification: NSNotification) {
+    //        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+    //        let keyboardHeight = keyboardSize?.height
+    //        scrollViewBottomConstraint.constant = keyboardHeight!
+    //    }
+    
+    //    func keyboardWillHide(notification: NSNotification) {
+    //        scrollViewBottomConstraint.constant = 0
+    //    }
+    
     func registerForKeyboardNotifications() {
-        // register the notifications here
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
+
     
-    
-    func adjustForKeyboard(notification: Notification) {
-        let userInfo = notification.userInfo!
-        
-        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-        
-        if notification.name == Notification.Name.UIKeyboardWillHide {
-            scrollView.contentInset = UIEdgeInsets.zero
-        } else {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo: [AnyHashable : Any] = notification.userInfo {
+            
+            if let endFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let duration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+                
+                let animationCurveRawNSN: NSNumber? = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+                
+                let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+                
+                let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+                var show  = false
+                if endFrame.origin.y >= UIScreen.main.bounds.size.height {
+                    show = false
+                } else {
+                    show = true
+                }
+                scrollViewBottomConstraint.constant = endFrame.size.height * (show ? 1 : -1)
+                
+                UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve,
+                               animations: {
+                                self.view.layoutIfNeeded() }, completion: nil)
+            }
         }
-        
-        scrollView.scrollIndicatorInsets = scrollView.contentInset
     }
     
     
-    func keyboardWillShow(notification: NSNotification) {
-        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-        let keyboardHeight = keyboardSize?.height
-        scrollViewBottomConstraint.constant = keyboardHeight!
-    }
     
-    func keyboardWillHide(notification: NSNotification) {
-        scrollViewBottomConstraint.constant = 0
-    }
-    
-    
+    //                                let myFrame: CGRect = CGRect(x: 0.0, y: 0.0, width: Double(self.scrollView.frame.width), height: Double(self.scrollView.frame.height - endFrame.height))
+    //                                self.scrollView.frame = myFrame
+
     
     
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {

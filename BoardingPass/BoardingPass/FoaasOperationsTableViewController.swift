@@ -82,15 +82,10 @@ class FoaasOperationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foaasOperationCell", for: indexPath)
         cell.textLabel?.text = operations?[indexPath.row].name.filteredIfFilteringIsOn()
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightBold)
+        cell.textLabel?.font = UIFont(name: "Roboto-Bold", size: 18.0)
         return cell
     }
 
-    @IBAction func didTapDone(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -108,7 +103,9 @@ class FoaasOperationsTableViewController: UITableViewController {
     
     
     func floatingButtonClicked() {
-        dismiss(animated: true, completion: nil)
+        if let navVC = navigationController {
+            navVC.popViewController(animated: true)
+        }
     }
    
 }
