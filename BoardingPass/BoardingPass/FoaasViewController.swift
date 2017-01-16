@@ -13,6 +13,14 @@ class FoaasViewController: UIViewController {
   
     @IBOutlet weak var messageTextLabel: UILabel!
     @IBOutlet weak var subtitileTextLabel: UILabel!
+    
+    
+    @IBOutlet weak var foaasView: UIView!
+  
+    @IBOutlet weak var settingsView: UIView!
+    
+    @IBOutlet weak var foaasViewCenterYConstraint: NSLayoutConstraint!
+    
   
     private var foaasMessageString: String!
     
@@ -139,5 +147,39 @@ class FoaasViewController: UIViewController {
         })
     }
 
+    
+    
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        if self.foaasView.center.y == self.view.center.y {
+            animateFoaasViewTo(centerYConstant: -(self.settingsView.frame.height))
+        } else if self.foaasView.center.y != self.view.center.y {
+            animateFoaasViewTo(centerYConstant: 0)
+        }
+    }
+
+
+    @IBAction func didSwipeUp(_ sender: UISwipeGestureRecognizer) {
+        // if foassView is down, animate up
+        if self.foaasView.center.y == self.view.center.y {
+            animateFoaasViewTo(centerYConstant: -(self.settingsView.frame.height))
+        }
+    }
+    
+    @IBAction func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
+        // if foassView is up, anmate down
+        if self.foaasView.center.y != self.view.center.y {
+            animateFoaasViewTo(centerYConstant: 0)
+        }
+    }
+    
+    func animateFoaasViewTo(centerYConstant: CGFloat) {
+        UIView.animate(withDuration: 1, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.foaasViewCenterYConstraint.constant = centerYConstant
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
+    }
+    
+    
 
 }

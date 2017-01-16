@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE2659581E2D6E1100A3E208 /* FoaasSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */; };
+		DE2659591E2D6E1100A3E208 /* FoaasSettingsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */; };
 		DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBDF61DE50B5E00C116B2 /* AppDelegate.swift */; };
 		DE5CBDFC1DE50B5E00C116B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE5CBDFA1DE50B5E00C116B2 /* Main.storyboard */; };
 		DE5CBDFE1DE50B5E00C116B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE5CBDFD1DE50B5E00C116B2 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasSettingsMenuView.swift; sourceTree = "<group>"; };
+		DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoaasSettingsMenuView.xib; sourceTree = "<group>"; };
 		DE5CBDF31DE50B5E00C116B2 /* BoardingPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardingPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5CBDF61DE50B5E00C116B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE5CBDFB1DE50B5E00C116B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */,
 				DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */,
 				DEE4EC501DEB990600063CBE /* OperationPreviewViewController.swift */,
+				DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */,
+				DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -276,6 +282,7 @@
 				DE9912FB1E29580600659E59 /* Roboto-Regular.ttf in Resources */,
 				DE9912F21E29580600659E59 /* Roboto-Black.ttf in Resources */,
 				DE9912F71E29580600659E59 /* Roboto-Light.ttf in Resources */,
+				DE2659591E2D6E1100A3E208 /* FoaasSettingsMenuView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE2659581E2D6E1100A3E208 /* FoaasSettingsMenuView.swift in Sources */,
 				DE5CBE161DE517F200C116B2 /* FoaasProtocols.swift in Sources */,
 				DEE4EC471DE9E85F00063CBE /* FoaasDataManager.swift in Sources */,
 				DE5CBE0D1DE50C4F00C116B2 /* FoaasOperation.swift in Sources */,

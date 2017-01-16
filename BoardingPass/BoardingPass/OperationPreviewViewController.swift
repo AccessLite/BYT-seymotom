@@ -244,15 +244,17 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
                 
                 let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
                 var show  = false
-                if endFrame.origin.y >= UIScreen.main.bounds.size.height {
+                if endFrame.origin.y == UIScreen.main.bounds.size.height {
                     show = false
                 } else {
                     show = true
                 }
-                scrollViewBottomConstraint.constant = endFrame.size.height * (show ? 1 : -1)
+                self.scrollViewBottomConstraint.constant = endFrame.size.height * (show ? 1 : -1)
                 
                 UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve,
                                animations: {
+                                self.scrollView.contentInset = show ? UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0) : UIEdgeInsets.zero
+                                // need to move the content of the scrollView up the height of the keyboard
                                 self.view.layoutIfNeeded() }, completion: nil)
             }
         }

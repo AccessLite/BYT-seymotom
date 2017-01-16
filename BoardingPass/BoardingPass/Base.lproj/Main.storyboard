@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -30,44 +31,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Text label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="2lq-Kg-Ode">
-                                <rect key="frame" x="8" y="28" width="359" height="47"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZX4-LL-5kS">
-                                <rect key="frame" x="295" y="587" width="60" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgh-a0-2vv" userLabel="SettingsView" customClass="FoaasSettingsMenuView" customModule="BoardingPass" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NT5-gP-1UJ" userLabel="FoaasView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Text label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="2lq-Kg-Ode">
+                                        <rect key="frame" x="8" y="8" width="359" height="47"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Subtitle Text Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO0-S2-EbH">
+                                        <rect key="frame" x="8" y="63" width="359" height="42"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="35"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZX4-LL-5kS">
+                                        <rect key="frame" x="295" y="587" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="5uy-JH-tgP"/>
+                                            <constraint firstAttribute="width" constant="60" id="kMT-cl-dmg"/>
+                                        </constraints>
+                                        <state key="normal" image="Add Button"/>
+                                        <connections>
+                                            <action selector="octoButtonTapped:" destination="HzA-Tg-J6o" eventType="touchUpInside" id="MyB-I3-tjr"/>
+                                            <action selector="octoButtonTapped:" destination="HzA-Tg-J6o" eventType="touchDown" id="SvW-9I-Ff3"/>
+                                            <segue destination="cM2-D5-BLp" kind="show" identifier="tableviewSegue" id="9Dv-tF-Pdv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOx-FV-W8d" userLabel="Settings Button">
+                                        <rect key="frame" x="177" y="637" width="20" height="22"/>
+                                        <state key="normal" image="disclosure_down"/>
+                                        <connections>
+                                            <action selector="settingsButtonPressed:" destination="HzA-Tg-J6o" eventType="touchUpInside" id="dm0-ZW-jni"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="5uy-JH-tgP"/>
-                                    <constraint firstAttribute="width" constant="60" id="kMT-cl-dmg"/>
+                                    <constraint firstItem="2lq-Kg-Ode" firstAttribute="top" secondItem="NT5-gP-1UJ" secondAttribute="top" constant="8" id="3pV-7o-KmD"/>
+                                    <constraint firstItem="2lq-Kg-Ode" firstAttribute="leading" secondItem="NT5-gP-1UJ" secondAttribute="leading" constant="8" id="6lk-8k-pIz"/>
+                                    <constraint firstAttribute="bottom" secondItem="dOx-FV-W8d" secondAttribute="bottom" constant="8" id="HYp-NB-rbf"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZX4-LL-5kS" secondAttribute="trailing" constant="20" id="Plh-pa-SnS"/>
+                                    <constraint firstItem="ZX4-LL-5kS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SO0-S2-EbH" secondAttribute="bottom" constant="8" id="SHB-Z3-NuK"/>
+                                    <constraint firstAttribute="trailing" secondItem="2lq-Kg-Ode" secondAttribute="trailing" constant="8" id="SSY-eG-ofa"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZX4-LL-5kS" secondAttribute="bottom" constant="20" id="TUh-g2-a0t"/>
+                                    <constraint firstItem="dOx-FV-W8d" firstAttribute="centerX" secondItem="NT5-gP-1UJ" secondAttribute="centerX" id="dFR-Wf-WiY"/>
+                                    <constraint firstAttribute="trailing" secondItem="SO0-S2-EbH" secondAttribute="trailing" constant="8" id="fyJ-Rw-DV1"/>
+                                    <constraint firstItem="SO0-S2-EbH" firstAttribute="leading" secondItem="NT5-gP-1UJ" secondAttribute="leading" constant="8" id="xXk-n9-P8K"/>
+                                    <constraint firstItem="SO0-S2-EbH" firstAttribute="top" secondItem="2lq-Kg-Ode" secondAttribute="bottom" constant="8" id="y5i-Q9-bco"/>
                                 </constraints>
-                                <state key="normal" image="Add Button"/>
                                 <connections>
-                                    <action selector="octoButtonTapped:" destination="HzA-Tg-J6o" eventType="touchUpInside" id="MyB-I3-tjr"/>
-                                    <action selector="octoButtonTapped:" destination="HzA-Tg-J6o" eventType="touchDown" id="SvW-9I-Ff3"/>
-                                    <segue destination="cM2-D5-BLp" kind="show" identifier="tableviewSegue" id="9Dv-tF-Pdv"/>
+                                    <outletCollection property="gestureRecognizers" destination="5J8-Fi-NdU" appends="YES" id="HG1-Mu-WGg"/>
+                                    <outletCollection property="gestureRecognizers" destination="QCd-Nn-Plx" appends="YES" id="FVt-0T-QLD"/>
                                 </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Subtitle Text Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO0-S2-EbH">
-                                <rect key="frame" x="8" y="83" width="359" height="41.5"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="2lq-Kg-Ode" secondAttribute="trailing" constant="8" id="2fI-KS-8Zd"/>
-                            <constraint firstItem="2lq-Kg-Ode" firstAttribute="top" secondItem="X2D-KT-fCQ" secondAttribute="bottom" constant="8" id="8Bz-jh-may"/>
-                            <constraint firstItem="cfa-zY-BkD" firstAttribute="top" secondItem="ZX4-LL-5kS" secondAttribute="bottom" constant="20" id="BeP-Mb-XmO"/>
-                            <constraint firstItem="SO0-S2-EbH" firstAttribute="top" secondItem="2lq-Kg-Ode" secondAttribute="bottom" constant="8" id="J6Z-Da-gf6"/>
-                            <constraint firstAttribute="trailing" secondItem="SO0-S2-EbH" secondAttribute="trailing" constant="8" id="Qra-9b-MPw"/>
-                            <constraint firstItem="SO0-S2-EbH" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" constant="8" id="Y2h-ip-Vo0"/>
-                            <constraint firstItem="ZX4-LL-5kS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SO0-S2-EbH" secondAttribute="bottom" constant="8" id="cYl-lo-HdC"/>
-                            <constraint firstAttribute="trailing" secondItem="ZX4-LL-5kS" secondAttribute="trailing" constant="20" id="oRf-1W-9eY"/>
-                            <constraint firstItem="2lq-Kg-Ode" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" constant="8" id="sLI-3L-MV3"/>
+                            <constraint firstItem="NT5-gP-1UJ" firstAttribute="centerX" secondItem="tDN-Sc-jpY" secondAttribute="centerX" id="6os-Ri-qRu"/>
+                            <constraint firstItem="Cgh-a0-2vv" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" multiplier="0.3" id="OO6-hh-aXZ"/>
+                            <constraint firstItem="NT5-gP-1UJ" firstAttribute="width" secondItem="tDN-Sc-jpY" secondAttribute="width" id="SiC-cH-PWz"/>
+                            <constraint firstItem="NT5-gP-1UJ" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" id="f98-6v-DvR"/>
+                            <constraint firstItem="cfa-zY-BkD" firstAttribute="top" secondItem="Cgh-a0-2vv" secondAttribute="bottom" id="fjM-Iw-Ew7"/>
+                            <constraint firstAttribute="trailing" secondItem="Cgh-a0-2vv" secondAttribute="trailing" id="id9-Ow-VFu"/>
+                            <constraint firstItem="NT5-gP-1UJ" firstAttribute="centerY" secondItem="tDN-Sc-jpY" secondAttribute="centerY" id="lh2-wW-l8J"/>
+                            <constraint firstItem="Cgh-a0-2vv" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" id="yNZ-5w-n8N"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="gJg-BO-eZe" appends="YES" id="bI9-A2-IG5"/>
@@ -76,7 +111,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="zfU-XE-hfM"/>
                     <connections>
+                        <outlet property="foaasView" destination="NT5-gP-1UJ" id="Xib-CC-AKn"/>
+                        <outlet property="foaasViewCenterYConstraint" destination="lh2-wW-l8J" id="2zy-E6-zw7"/>
                         <outlet property="messageTextLabel" destination="2lq-Kg-Ode" id="9Bk-0W-gYz"/>
+                        <outlet property="settingsView" destination="Cgh-a0-2vv" id="MSb-Bc-7ou"/>
                         <outlet property="subtitileTextLabel" destination="SO0-S2-EbH" id="XrY-QW-Qgl"/>
                     </connections>
                 </viewController>
@@ -91,6 +129,16 @@
                         <action selector="didRecognizeTap:" destination="HzA-Tg-J6o" id="6x6-EY-vxY"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="5J8-Fi-NdU">
+                    <connections>
+                        <action selector="didSwipeUp:" destination="HzA-Tg-J6o" id="qnp-kb-i5i"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="QCd-Nn-Plx">
+                    <connections>
+                        <action selector="didSwipeDown:" destination="HzA-Tg-J6o" id="2dg-tR-bg3"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1743.2" y="26.53673163418291"/>
         </scene>
@@ -107,7 +155,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNG-b4-VKI" id="TRv-Pi-f6v">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -352,5 +400,6 @@
         <image name="Add Button" width="57" height="57"/>
         <image name="Back Arrow" width="54" height="54"/>
         <image name="Done Check" width="54" height="54"/>
+        <image name="disclosure_down" width="20" height="13"/>
     </resources>
 </document>
