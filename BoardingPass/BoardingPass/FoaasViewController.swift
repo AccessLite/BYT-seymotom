@@ -63,21 +63,14 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
     }
     
     internal func updateFoaas(sender: Notification) {
-        // parse out sender.userInfo as needed
         if let notificationBundle = sender.userInfo {
-//            if let newURL = notificationBundle["url"] as? URL {
-//                FoaasDataManager.foaasEndpointURL = newURL
-//                loadFoaas()
-//            }
             if let newMessageString = notificationBundle["message"] as? String {
                 self.foaasFullString = newMessageString
-                var splitMessage = newMessageString.components(separatedBy: "-")
+                var splitMessage = newMessageString.components(separatedBy: "\n")
                 if let subtitle = splitMessage.popLast() {
-                    print("Subtitle:  -\(subtitle)")
-                    let message = splitMessage.reduce("", { $0 == "" ? $1 : $0 + "-" + $1 })
-                    print("Message:  \(message)")
+                    let message = splitMessage.reduce("", +)
+                    self.foaasSubtitle = subtitle
                     self.foaasMessage = message
-                    self.foaasSubtitle = "-" + subtitle
                     reloadLabels()
                 }
             }
@@ -128,7 +121,6 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
     }
     
     
-    
     // MARK: Button Animation
     
     @IBAction func octoButtonTapped(_ sender: UIButton) {
@@ -142,6 +134,10 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
                 sender.transform = originalTransform
         })
     }
+    
+    
+    
+    // MARK: - Settings Menu Animations
 
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
         if self.foaasView.center.y == self.view.center.y {
@@ -154,7 +150,6 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
     }
 
     @IBAction func didSwipeUp(_ sender: UISwipeGestureRecognizer) {
-        // if foassView is down, animate up
         if self.foaasView.center.y == self.view.center.y {
             animateFoaasViewTo(centerYConstant: -(self.settingsView.frame.height))
             animateSettingsViewTo(baselineConstant: 0)
@@ -162,7 +157,6 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
     }
     
     @IBAction func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
-        // if foassView is up, anmate down
         if self.foaasView.center.y != self.view.center.y {
             animateFoaasViewTo(centerYConstant: 0)
             animateSettingsViewTo(baselineConstant: -100)
@@ -230,7 +224,4 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
         reloadLabels()
     }
     
-    
-    
-
 }
