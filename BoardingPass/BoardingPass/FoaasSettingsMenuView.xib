@@ -16,10 +16,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FoaasSettingsMenuView" customModule="BoardingPass" customModuleProvider="target">
             <connections>
-                <outlet property="cameraRollButton" destination="aLL-Xn-8JS" id="7yF-Mc-7YG"/>
                 <outlet property="facebookButton" destination="c1N-eF-95J" id="bdi-os-m8T"/>
                 <outlet property="profanitySwitch" destination="h69-n9-HvS" id="GTX-pl-q3r"/>
-                <outlet property="shareImageButton" destination="zrT-Ig-K5V" id="UDI-bP-1Ai"/>
+                <outlet property="saveScreenShotButton" destination="aLL-Xn-8JS" id="XFl-rx-PWd"/>
+                <outlet property="shareMessageButton" destination="zrT-Ig-K5V" id="oSS-CM-RGn"/>
                 <outlet property="twitterButton" destination="2kH-kv-c5O" id="OwF-aH-w3l"/>
             </connections>
         </placeholder>
@@ -37,22 +37,37 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h69-n9-HvS">
                     <rect key="frame" x="302" y="62" width="51" height="31"/>
                     <color key="onTintColor" red="0.0" green="1" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="profanitySwitchToggled:" destination="-1" eventType="valueChanged" id="fe9-1f-Knh"/>
+                    </connections>
                 </switch>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1N-eF-95J">
                     <rect key="frame" x="244.5" y="112" width="30" height="30"/>
                     <state key="normal" image="FB Icon"/>
+                    <connections>
+                        <action selector="settingsMenuButtonTapped:" destination="-1" eventType="touchUpInside" id="50g-sz-DCX"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLL-Xn-8JS">
                     <rect key="frame" x="165.5" y="113" width="28" height="28"/>
                     <state key="normal" image="ic_camera_roll_black_48px"/>
+                    <connections>
+                        <action selector="settingsMenuButtonTapped:" destination="-1" eventType="touchUpInside" id="OhW-JR-QIM"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2kH-kv-c5O">
                     <rect key="frame" x="325.5" y="113" width="28" height="28"/>
                     <state key="normal" image="Twitter_Logo_White_On_Blue"/>
+                    <connections>
+                        <action selector="settingsMenuButtonTapped:" destination="-1" eventType="touchUpInside" id="1gA-iy-UDV"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrT-Ig-K5V">
                     <rect key="frame" x="85.5" y="113" width="28" height="28"/>
                     <state key="normal" image="ic_file_upload_black_48px"/>
+                    <connections>
+                        <action selector="settingsMenuButtonTapped:" destination="-1" eventType="touchUpInside" id="WLc-7p-bnG"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFANITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbX-qF-isL">
                     <rect key="frame" x="16" y="53" width="94.5" height="21"/>

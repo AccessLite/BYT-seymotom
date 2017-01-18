@@ -230,11 +230,9 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
-
     
     func keyboardNotification(notification: NSNotification) {
         if let userInfo: [AnyHashable : Any] = notification.userInfo {
-            
             if let endFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 let duration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
                 
@@ -253,8 +251,8 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
                 
                 UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve,
                                animations: {
-                                self.scrollView.contentInset = show ? UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0) : UIEdgeInsets.zero
                                 // need to move the content of the scrollView up the height of the keyboard
+                                self.scrollView.contentInset = show ? UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0) : UIEdgeInsets.zero
                                 self.view.layoutIfNeeded() }, completion: nil)
             }
         }

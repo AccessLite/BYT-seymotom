@@ -95,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE2659781E2EA10300A3E208 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */,
+				DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
 		DE5CBDEA1DE50B5E00C116B2 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +126,7 @@
 			children = (
 				DE5CBE101DE50C6800C116B2 /* Model */,
 				DE5CBE141DE50D5300C116B2 /* Networking */,
+				DE2659781E2EA10300A3E208 /* Custom Views */,
 				DE5CBE091DE50B7D00C116B2 /* View Controllers */,
 				DE5CBE081DE50B7400C116B2 /* UI Stuff */,
 				DE5CBE111DE50C8100C116B2 /* Supporting Files */,
@@ -140,8 +150,6 @@
 				DEE4EC481DEA04F900063CBE /* FoaasViewController.swift */,
 				DEE4EC4A1DEA058C00063CBE /* FoaasOperationsTableViewController.swift */,
 				DEE4EC501DEB990600063CBE /* OperationPreviewViewController.swift */,
-				DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */,
-				DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

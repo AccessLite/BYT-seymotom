@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,8 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgh-a0-2vv" userLabel="SettingsView" customClass="FoaasSettingsMenuView" customModule="BoardingPass" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
-                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="567" width="375" height="200"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NT5-gP-1UJ" userLabel="FoaasView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -71,7 +71,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="2lq-Kg-Ode" firstAttribute="top" secondItem="NT5-gP-1UJ" secondAttribute="top" constant="8" id="3pV-7o-KmD"/>
@@ -96,17 +96,16 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="centerX" secondItem="tDN-Sc-jpY" secondAttribute="centerX" id="6os-Ri-qRu"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Cgh-a0-2vv" secondAttribute="bottom" constant="-100" id="MW0-nR-gKP"/>
                             <constraint firstItem="Cgh-a0-2vv" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" multiplier="0.3" id="OO6-hh-aXZ"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="width" secondItem="tDN-Sc-jpY" secondAttribute="width" id="SiC-cH-PWz"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" id="f98-6v-DvR"/>
-                            <constraint firstItem="cfa-zY-BkD" firstAttribute="top" secondItem="Cgh-a0-2vv" secondAttribute="bottom" id="fjM-Iw-Ew7"/>
                             <constraint firstAttribute="trailing" secondItem="Cgh-a0-2vv" secondAttribute="trailing" id="id9-Ow-VFu"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="centerY" secondItem="tDN-Sc-jpY" secondAttribute="centerY" id="lh2-wW-l8J"/>
                             <constraint firstItem="Cgh-a0-2vv" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" id="yNZ-5w-n8N"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="gJg-BO-eZe" appends="YES" id="bI9-A2-IG5"/>
-                            <outletCollection property="gestureRecognizers" destination="oqL-Pi-wdm" appends="YES" id="MGN-SS-JcP"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="zfU-XE-hfM"/>
@@ -115,6 +114,7 @@
                         <outlet property="foaasViewCenterYConstraint" destination="lh2-wW-l8J" id="2zy-E6-zw7"/>
                         <outlet property="messageTextLabel" destination="2lq-Kg-Ode" id="9Bk-0W-gYz"/>
                         <outlet property="settingsView" destination="Cgh-a0-2vv" id="MSb-Bc-7ou"/>
+                        <outlet property="settingsViewBaselineConstraint" destination="MW0-nR-gKP" id="VxA-I2-mBP"/>
                         <outlet property="subtitileTextLabel" destination="SO0-S2-EbH" id="XrY-QW-Qgl"/>
                     </connections>
                 </viewController>
@@ -124,11 +124,6 @@
                         <action selector="didPressLong:" destination="HzA-Tg-J6o" id="xGX-zu-6aR"/>
                     </connections>
                 </pongPressGestureRecognizer>
-                <tapGestureRecognizer id="oqL-Pi-wdm">
-                    <connections>
-                        <action selector="didRecognizeTap:" destination="HzA-Tg-J6o" id="6x6-EY-vxY"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <swipeGestureRecognizer direction="up" id="5J8-Fi-NdU">
                     <connections>
                         <action selector="didSwipeUp:" destination="HzA-Tg-J6o" id="qnp-kb-i5i"/>
@@ -149,7 +144,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Otg-v2-8cb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="foaasOperationCell" id="CNG-b4-VKI">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -158,6 +153,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="HgR-37-eqq" kind="show" identifier="operationPreviewSegue" id="XCm-7s-kyj"/>
                                 </connections>
@@ -203,7 +199,7 @@
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xcd-al-jCN">
                                         <rect key="frame" x="16" y="36" width="343" height="200"/>
-                                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="wNP-e7-0SV"/>
                                         </constraints>
@@ -330,7 +326,7 @@
                                 </connections>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4cW-Bs-NC1" firstAttribute="top" secondItem="SP0-2L-3hh" secondAttribute="top" id="7Xr-5o-MMS"/>
                             <constraint firstItem="ZyC-rP-ohu" firstAttribute="top" secondItem="4cW-Bs-NC1" secondAttribute="bottom" identifier="scrollViewBottomConstraint" id="Eih-YI-E4Q">
