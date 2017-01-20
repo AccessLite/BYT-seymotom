@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DE2659581E2D6E1100A3E208 /* FoaasSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */; };
 		DE2659591E2D6E1100A3E208 /* FoaasSettingsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */; };
+		DE52EBC21E319EB500047429 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52EBC01E319EB500047429 /* ColorCollectionViewCell.swift */; };
+		DE52EBC31E319EB500047429 /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE52EBC11E319EB500047429 /* ColorCollectionViewCell.xib */; };
 		DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBDF61DE50B5E00C116B2 /* AppDelegate.swift */; };
 		DE5CBDFC1DE50B5E00C116B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE5CBDFA1DE50B5E00C116B2 /* Main.storyboard */; };
 		DE5CBDFE1DE50B5E00C116B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE5CBDFD1DE50B5E00C116B2 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 /* Begin PBXFileReference section */
 		DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasSettingsMenuView.swift; sourceTree = "<group>"; };
 		DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoaasSettingsMenuView.xib; sourceTree = "<group>"; };
+		DE52EBC01E319EB500047429 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		DE52EBC11E319EB500047429 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
 		DE5CBDF31DE50B5E00C116B2 /* BoardingPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardingPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5CBDF61DE50B5E00C116B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE5CBDFB1DE50B5E00C116B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 			children = (
 				DE2659561E2D6E1100A3E208 /* FoaasSettingsMenuView.swift */,
 				DE2659571E2D6E1100A3E208 /* FoaasSettingsMenuView.xib */,
+				DE52EBC01E319EB500047429 /* ColorCollectionViewCell.swift */,
+				DE52EBC11E319EB500047429 /* ColorCollectionViewCell.xib */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				DE9912F61E29580600659E59 /* Roboto-Italic.ttf in Resources */,
 				DE9912FE1E29580600659E59 /* RobotoCondensed-Bold.ttf in Resources */,
 				DE9912F51E29580600659E59 /* Roboto-BoldItalic.ttf in Resources */,
+				DE52EBC31E319EB500047429 /* ColorCollectionViewCell.xib in Resources */,
 				DE9912F91E29580600659E59 /* Roboto-Medium.ttf in Resources */,
 				DE9912FB1E29580600659E59 /* Roboto-Regular.ttf in Resources */,
 				DE9912F21E29580600659E59 /* Roboto-Black.ttf in Resources */,
@@ -309,6 +316,7 @@
 				DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */,
 				DEE4EC491DEA04F900063CBE /* FoaasViewController.swift in Sources */,
 				DEC221931DFB2E51005B1BD7 /* String+Extension.swift in Sources */,
+				DE52EBC21E319EB500047429 /* ColorCollectionViewCell.swift in Sources */,
 				DE5CBE0B1DE50C3300C116B2 /* Foaas.swift in Sources */,
 				DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */,
 				DEE4EC511DEB990600063CBE /* OperationPreviewViewController.swift in Sources */,

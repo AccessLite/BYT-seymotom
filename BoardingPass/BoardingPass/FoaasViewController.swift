@@ -224,4 +224,9 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
         reloadLabels()
     }
     
+    func colorSchemeDidUpdate(color: UIColor) {
+        self.foaasView.backgroundColor = color
+    }
+    
+    
 }

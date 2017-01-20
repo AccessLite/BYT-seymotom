@@ -28,19 +28,17 @@ import UIKit
 class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     //MARK: Properties
-    private let foaasBaseUrl = "https://www.foaas.com"
     var operation: FoaasOperation!
+    private let foaasBaseUrl = "https://www.foaas.com"
     private var pathBuilder: FoaasPathBuilder?
-    
-    var originalPreviewText: String!
-    
-    var newFoaasMessageText: String!
+    private var originalPreviewText: String!
+    private var newFoaasMessageText: String!
     
     private var uri: String {
         return operation.url
     }
     
-    var operationEndpoint: URL {
+    private var operationEndpoint: URL {
         return URL(string: foaasBaseUrl + uri)!
     }
     
@@ -54,14 +52,12 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     @IBOutlet weak var referenceLabel: UILabel!
     @IBOutlet weak var referenceTextField: UITextField!
     
-    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
     
     @IBOutlet weak var textFieldView: UIView!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    
     
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
@@ -75,7 +71,6 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
         fromTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
         referenceTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
-        
         }
 
     func loadOperation(url: URL) {
@@ -132,9 +127,6 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         default:
             break
         }
-//        if let newURL = URL(string: self.foaasBaseUrl + self.pathBuilder!.build()) {
-//            loadOperation(url: newURL)
-//        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -163,7 +155,6 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         default:
             break
         }
-        
     }
     
     
@@ -184,52 +175,13 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     }
    
 
-    
     // MARK : KEYBOARD NOTIFICATION
-    
-//    func registerForKeyboardNotifications() {
-//        // register the notifications here
-////        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-////        
-////        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//        
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-//
-//        
-////        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
-////        
-////        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
-//    }
-    
-    
-//    func adjustForKeyboard(notification: Notification) {
-//        let userInfo = notification.userInfo!
-//        
-//        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-//        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-//        
-//        if notification.name == Notification.Name.UIKeyboardWillHide {
-//            scrollView.contentInset = UIEdgeInsets.zero
-//        } else {
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
-//        }
-//        
-//        scrollView.scrollIndicatorInsets = scrollView.contentInset
-//    }
-    
-    //    func keyboardWillShow(notification: NSNotification) {
-    //        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-    //        let keyboardHeight = keyboardSize?.height
-    //        scrollViewBottomConstraint.constant = keyboardHeight!
-    //    }
-    
-    //    func keyboardWillHide(notification: NSNotification) {
-    //        scrollViewBottomConstraint.constant = 0
-    //    }
+
     
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
+    
     
     func keyboardNotification(notification: NSNotification) {
         if let userInfo: [AnyHashable : Any] = notification.userInfo {
@@ -259,15 +211,8 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     }
     
     
-    
-    //                                let myFrame: CGRect = CGRect(x: 0.0, y: 0.0, width: Double(self.scrollView.frame.width), height: Double(self.scrollView.frame.height - endFrame.height))
-    //                                self.scrollView.frame = myFrame
-
-    
-    
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
-    
     
 }
