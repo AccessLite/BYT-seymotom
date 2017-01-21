@@ -41,8 +41,8 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
     func loadFoaas() {
         FoaasDataManager.getFoaas(url: FoaasDataManager.foaasEndpointURL) { (thisFoaas) in
             if thisFoaas != nil {
+
                self.foaasFullString = "\(thisFoaas!.message) \(thisFoaas!.subtitle)"
-                print(">>>" + self.foaasFullString)
                 DispatchQueue.main.async {
                     self.foaasMessage = thisFoaas!.message
                     self.foaasSubtitle = thisFoaas!.subtitle
