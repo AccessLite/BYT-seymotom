@@ -28,20 +28,27 @@ import UIKit
 class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     //MARK: Properties
-    private let foaasBaseUrl = "https://www.foaas.com"
     var operation: FoaasOperation!
+    private let foaasBaseUrl = "https://www.foaas.com"
     private var pathBuilder: FoaasPathBuilder?
+    private var originalPreviewText: String!
+    private var newFoaasMessageText: String!
+    
+    var font = UIFont(name: "Roboto-Regular", size: 14.0)
+    
+    
     
     private var uri: String {
         return operation.url
     }
     
-    var operationEndpoint: URL {
+    private var operationEndpoint: URL {
         return URL(string: foaasBaseUrl + uri)!
     }
     
     //MARK: Outlets
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var previewTextView: UITextView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -49,6 +56,13 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var referenceLabel: UILabel!
     @IBOutlet weak var referenceTextField: UITextField!
+    
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var selectButton: UIButton!
+    
+    @IBOutlet weak var textFieldView: UIView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
@@ -58,12 +72,24 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         self.pathBuilder = FoaasPathBuilder(operation: self.operation)
         registerForKeyboardNotifications()
         loadOperation(url: operationEndpoint)
+        
+        nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
+        fromTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
+        referenceTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
+        
+        setColorScheme()
+        }
+    
+    func setColorScheme() {
+        self.backgroundView.backgroundColor = FoaasColorManager.shared.primary
     }
 
     func loadOperation(url: URL) {
         FoaasDataManager.getFoaas(url: url) { (foaas: Foaas?) in
             DispatchQueue.main.async {
-                self.previewTextView.text = foaas?.description.filteredIfFilteringIsOn()
+                self.originalPreviewText = foaas?.description
+                self.newFoaasMessageText = self.originalPreviewText
+                self.previewTextView.text = self.originalPreviewText.filteredIfFilteringIsOn()
                 guard let fieldKeys: [String] = (self.pathBuilder?.allKeys()) else { return }
                 switch self.operation.fields.count {
                 case 1:
@@ -98,18 +124,19 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     func textFieldWasEdited(_ textField: UITextField) {
         guard let fieldKeys: [String] = (self.pathBuilder?.allKeys()) else { return }
         guard let theText = textField.text, theText.characters.count > 0 else { return }
+        
         switch textField {
         case nameTextField:
             self.pathBuilder?.update(key: fieldKeys[0], value: theText)
+            originalPreviewText = newFoaasMessageText
         case fromTextField:
             self.pathBuilder?.update(key: fieldKeys[1], value: theText)
+            originalPreviewText = newFoaasMessageText
         case referenceTextField:
             self.pathBuilder?.update(key: fieldKeys[2], value: theText)
+            originalPreviewText = newFoaasMessageText
         default:
             break
-        }
-        if let newURL = URL(string: self.foaasBaseUrl + self.pathBuilder!.build()) {
-            loadOperation(url: newURL)
         }
     }
     
@@ -122,37 +149,81 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         return true
     }
     
-    
-    //passes foaas back to FoaasVC
-    @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
-        let newURL = URL(string: "https://www.foaas.com\(self.pathBuilder!.build())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!)!
-        let notification = NotificationCenter.default
-        notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["url": newURL])
-         self.dismiss(animated: true, completion: nil)
+    func textFieldDidChange(sender: UITextField) {
+        guard let fieldKeys: [String] = (self.pathBuilder?.allKeys()) else { return }
+        guard let fieldDict = self.pathBuilder?.operationFields else { return }
+        guard let theText = sender.text else { return }
+        switch sender {
+        case nameTextField:
+            previewTextView.text = originalPreviewText.replacingOccurrences(of: fieldDict[fieldKeys[0]]!, with: theText).filteredIfFilteringIsOn()
+            newFoaasMessageText = originalPreviewText.replacingOccurrences(of: fieldDict[fieldKeys[0]]!, with: theText)
+        case fromTextField:
+            previewTextView.text = originalPreviewText.replacingOccurrences(of: fieldDict[fieldKeys[1]]!, with: theText).filteredIfFilteringIsOn()
+            newFoaasMessageText = originalPreviewText.replacingOccurrences(of: fieldDict[fieldKeys[1]]!, with: theText)
+        case referenceTextField:
+            previewTextView.text = originalPreviewText.replacingOccurrences(of: fieldDict[fieldKeys[2]]!, with: theText).filteredIfFilteringIsOn()
+            newFoaasMessageText = originalPreviewText.replacingOccurrences(of: fieldDict[fieldKeys[2]]!, with: theText)
+        default:
+            break
+        }
     }
     
     
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        if let navVc = navigationController {
+            navVc.popViewController(animated: true)
+        }
+    }
+    
+    @IBAction func selectButtonPressed(_ sender: UIButton) {
+        let notification = NotificationCenter.default
+        // send the message back too the foaas view controller as a string. Fix that shit.
+        notification.post(name: Notification.Name(rawValue: "FoaasObjectDidUpdate"), object: nil, userInfo: ["message": newFoaasMessageText])
+
+        if let navVC = navigationController {
+            navVC.popToRootViewController(animated: true)
+        }
+    }
+   
+
     // MARK : KEYBOARD NOTIFICATION
+
     
     func registerForKeyboardNotifications() {
-        // register the notifications here
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-        let keyboardHeight = keyboardSize?.height
-        scrollViewBottomConstraint.constant = keyboardHeight!        
+    
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo: [AnyHashable : Any] = notification.userInfo {
+            if let endFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let duration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+                
+                let animationCurveRawNSN: NSNumber? = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+                
+                let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+                
+                let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+                var show  = false
+                if endFrame.origin.y == UIScreen.main.bounds.size.height {
+                    show = false
+                } else {
+                    show = true
+                }
+                self.scrollViewBottomConstraint.constant = endFrame.size.height * (show ? 1 : -1)
+                
+                UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve,
+                               animations: {
+                                // need to move the content of the scrollView up the height of the keyboard
+                                self.scrollView.contentInset = show ? UIEdgeInsets(top: 0, left: 0, bottom: endFrame.height, right: 0) : UIEdgeInsets.zero
+                                self.view.layoutIfNeeded() }, completion: nil)
+            }
+        }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
-        scrollViewBottomConstraint.constant = 0
-    }
     
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
-    
     
 }

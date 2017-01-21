@@ -9,14 +9,19 @@
 import UIKit
 
 // Clean, simple view controller. I like it. 
-class FoaasViewController: UIViewController {
+class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
   
     @IBOutlet weak var messageTextLabel: UILabel!
     @IBOutlet weak var subtitileTextLabel: UILabel!
-  
-    private var foaasMessageString: String!
     
-    //let foulLanguageManager = FoulLanguageManager()
+    @IBOutlet weak var foaasView: UIView!
+    @IBOutlet weak var settingsView: FoaasSettingsMenuView!
+    @IBOutlet weak var foaasViewCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsViewBaselineConstraint: NSLayoutConstraint!
+  
+    private var foaasFullString: String!
+    private var foaasMessage: String!
+    private var foaasSubtitle: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +30,33 @@ class FoaasViewController: UIViewController {
         FoaasDataManager.shared.requestOperations { (operations) in
             //not sure what to do here
         }
+        settingsView.delegate = self
+        setColorScheme()
+    }
+    
+    func setColorScheme() {
+        self.foaasView.backgroundColor = FoaasColorManager.shared.primary
     }
     
     func loadFoaas() {
         FoaasDataManager.getFoaas(url: FoaasDataManager.foaasEndpointURL) { (thisFoaas) in
             if thisFoaas != nil {
-                self.foaasMessageString = "\(thisFoaas!.message) \(thisFoaas!.subtitle)"
+
+               self.foaasFullString = "\(thisFoaas!.message) \(thisFoaas!.subtitle)"
                 DispatchQueue.main.async {
-                    self.messageTextLabel.text = thisFoaas!.message.filteredIfFilteringIsOn()
-                    self.subtitileTextLabel.text = thisFoaas!.subtitle.filteredIfFilteringIsOn()
+                    self.foaasMessage = thisFoaas!.message
+                    self.foaasSubtitle = thisFoaas!.subtitle
+                    self.reloadLabels()
                 }
             }
         }
+    }
+    
+    //MARK: - Update Text Labels
+    
+    func reloadLabels() {
+        messageTextLabel.text = foaasMessage.filteredIfFilteringIsOn()
+        subtitileTextLabel.text = foaasSubtitle.filteredIfFilteringIsOn()
     }
     
   
@@ -48,18 +68,22 @@ class FoaasViewController: UIViewController {
     }
     
     internal func updateFoaas(sender: Notification) {
-        // parse out sender.userInfo as needed
         if let notificationBundle = sender.userInfo {
-            if let newURL = notificationBundle["url"] as? URL {
-                FoaasDataManager.foaasEndpointURL = newURL
-                loadFoaas()
+            if let newMessageString = notificationBundle["message"] as? String {
+                self.foaasFullString = newMessageString
+                var splitMessage = newMessageString.components(separatedBy: "\n")
+                if let subtitle = splitMessage.popLast() {
+                    let message = splitMessage.reduce("", +)
+                    self.foaasSubtitle = subtitle
+                    self.foaasMessage = message
+                    reloadLabels()
+                }
             }
         }
     }
     
     
     // MARK: Long Press Screenshot
-    
     
     @IBAction func didPressLong(_ sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.began {
@@ -78,6 +102,13 @@ class FoaasViewController: UIViewController {
         }
     }
     
+    // command + option + /
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - image: <#image description#>
+    ///   - didFinishSavingWithError: <#didFinishSavingWithError description#>
+    ///   - contextInfo: <#contextInfo description#>
     internal func createScreenShotCompletion(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: UnsafeMutableRawPointer?) {
         if let _ = didFinishSavingWithError {
             showAlertView(message: "Screenshot failed to save")
@@ -95,18 +126,6 @@ class FoaasViewController: UIViewController {
     }
     
     
-    // MARK: Tap Gesture Messaging
-    
-    @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
-        if let theMessage = self.foaasMessageString {
-            
-            let activityViewController = UIActivityViewController(activityItems: [theMessage], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
-        }
-    }
-    
-    
     // MARK: Button Animation
     
     @IBAction func octoButtonTapped(_ sender: UIButton) {
@@ -120,6 +139,99 @@ class FoaasViewController: UIViewController {
                 sender.transform = originalTransform
         })
     }
+    
+    
+    
+    // MARK: - Settings Menu Animations
 
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        if self.foaasView.center.y == self.view.center.y {
+            animateFoaasViewTo(centerYConstant: -(self.settingsView.frame.height))
+            animateSettingsViewTo(baselineConstant: 0)
+        } else if self.foaasView.center.y != self.view.center.y {
+            animateFoaasViewTo(centerYConstant: 0)
+            animateSettingsViewTo(baselineConstant: -100)
+        }
+    }
 
+    @IBAction func didSwipeUp(_ sender: UISwipeGestureRecognizer) {
+        if self.foaasView.center.y == self.view.center.y {
+            animateFoaasViewTo(centerYConstant: -(self.settingsView.frame.height))
+            animateSettingsViewTo(baselineConstant: 0)
+        }
+    }
+    
+    @IBAction func didSwipeDown(_ sender: UISwipeGestureRecognizer) {
+        if self.foaasView.center.y != self.view.center.y {
+            animateFoaasViewTo(centerYConstant: 0)
+            animateSettingsViewTo(baselineConstant: -100)
+        }
+    }
+    
+    func animateFoaasViewTo(centerYConstant: CGFloat) {
+        UIView.animate(withDuration: 1, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.foaasViewCenterYConstraint.constant = centerYConstant
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
+    }
+    
+    func animateSettingsViewTo(baselineConstant: CGFloat) {
+        UIView.animate(withDuration: 1, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.settingsViewBaselineConstraint.constant = baselineConstant
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
+    }
+    
+    // MARK: - Settings Menu Delegate Methods
+    
+    func didTapTwitterButton() {
+        print("twitter")
+    }
+    
+    func didTapFacebookButton() {
+        print("facebook")
+    }
+    
+    func didTapShareMessageButton() {
+        if let theMessage = self.foaasFullString {
+
+            let activityViewController = UIActivityViewController(activityItems: [theMessage], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func didTapSaveScreenShotButton() {
+         print("camera roll")
+        // Start the context
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        // Draw the view into the context (this is the snapshot)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+        // End the context (this is required to not leak resources)
+        UIGraphicsEndImageContext()
+        // Save to photos
+        if let unwrappedSnapshot = snapshot {
+            UIImageWriteToSavedPhotosAlbum(unwrappedSnapshot, self, #selector(createScreenShotCompletion(image:didFinishSavingWithError:contextInfo:)), nil)
+        }
+        print("Screenshot")
+    }
+    
+    func profanitySwitchDidSwitchOn() {
+        FoaasDataManager.shared.filter = .isOn
+        reloadLabels()
+    }
+    
+    func profanityswitchDidSwitchOff() {
+        FoaasDataManager.shared.filter = .isOff
+        reloadLabels()
+    }
+    
+    func colorSchemeDidUpdate(color: UIColor) {
+        self.foaasView.backgroundColor = color
+    }
+    
+    
 }
