@@ -34,6 +34,10 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     private var originalPreviewText: String!
     private var newFoaasMessageText: String!
     
+    var font = UIFont(name: "Roboto-Regular", size: 14.0)
+    
+    
+    
     private var uri: String {
         return operation.url
     }
@@ -44,6 +48,7 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
     
     //MARK: Outlets
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var previewTextView: UITextView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -71,7 +76,13 @@ class OperationPreviewViewController: UIViewController, UITextFieldDelegate, UIT
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
         fromTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
         referenceTextField.addTarget(self, action: #selector(self.textFieldDidChange(sender:)), for: UIControlEvents.editingChanged)
+        
+        setColorScheme()
         }
+    
+    func setColorScheme() {
+        self.backgroundView.backgroundColor = FoaasColorManager.shared.primary
+    }
 
     func loadOperation(url: URL) {
         FoaasDataManager.getFoaas(url: url) { (foaas: Foaas?) in

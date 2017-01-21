@@ -58,6 +58,8 @@ class FoaasOperationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(floatingButton)
+        setColorScheme()
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -67,6 +69,10 @@ class FoaasOperationsTableViewController: UITableViewController {
             floatingButton.widthAnchor.constraint(equalToConstant: 60.0),
             floatingButton.heightAnchor.constraint(equalToConstant: 60.0)
             ].map { $0.isActive = true }
+    }
+    
+    func setColorScheme() {
+        self.tableView.backgroundColor = FoaasColorManager.shared.primary
     }
 
     
@@ -81,6 +87,7 @@ class FoaasOperationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foaasOperationCell", for: indexPath)
+        cell.backgroundColor = FoaasColorManager.shared.primaryLight
         cell.textLabel?.text = operations?[indexPath.row].name.filteredIfFilteringIsOn()
         cell.textLabel?.font = UIFont(name: "Roboto-Bold", size: 18.0)
         return cell

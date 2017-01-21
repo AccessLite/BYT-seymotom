@@ -21,6 +21,7 @@
 		DE5CBE131DE50D4D00C116B2 /* FoaasAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE121DE50D4D00C116B2 /* FoaasAPIManager.swift */; };
 		DE5CBE161DE517F200C116B2 /* FoaasProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */; };
 		DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */; };
+		DE6D1F3F1E33DB5F009B565C /* FoaasColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D1F3E1E33DB5F009B565C /* FoaasColorManager.swift */; };
 		DE9912F21E29580600659E59 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE9912E01E29580600659E59 /* Roboto-Black.ttf */; };
 		DE9912F31E29580600659E59 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE9912E11E29580600659E59 /* Roboto-BlackItalic.ttf */; };
 		DE9912F41E29580600659E59 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE9912E21E29580600659E59 /* Roboto-Bold.ttf */; };
@@ -63,6 +64,7 @@
 		DE5CBE121DE50D4D00C116B2 /* FoaasAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasAPIManager.swift; sourceTree = "<group>"; };
 		DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasProtocols.swift; sourceTree = "<group>"; };
 		DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasPathBuilder.swift; sourceTree = "<group>"; };
+		DE6D1F3E1E33DB5F009B565C /* FoaasColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoaasColorManager.swift; sourceTree = "<group>"; };
 		DE9912E01E29580600659E59 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		DE9912E11E29580600659E59 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		DE9912E21E29580600659E59 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				DE5CBE151DE517F200C116B2 /* FoaasProtocols.swift */,
 				DE65C3901DF77F73006D448A /* FoaasPathBuilder.swift */,
 				DEC221921DFB2E51005B1BD7 /* String+Extension.swift */,
+				DE6D1F3E1E33DB5F009B565C /* FoaasColorManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				DE5CBE0B1DE50C3300C116B2 /* Foaas.swift in Sources */,
 				DE65C3911DF77F73006D448A /* FoaasPathBuilder.swift in Sources */,
 				DEE4EC511DEB990600063CBE /* OperationPreviewViewController.swift in Sources */,
+				DE6D1F3F1E33DB5F009B565C /* FoaasColorManager.swift in Sources */,
 				DE5CBDF71DE50B5E00C116B2 /* AppDelegate.swift in Sources */,
 				DEE4EC4B1DEA058C00063CBE /* FoaasOperationsTableViewController.swift in Sources */,
 			);

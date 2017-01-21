@@ -30,7 +30,12 @@ class FoaasViewController: UIViewController, FoaasSettingsMenuDelegate {
         FoaasDataManager.shared.requestOperations { (operations) in
             //not sure what to do here
         }
-        settingsView.delegate = self        
+        settingsView.delegate = self
+        setColorScheme()
+    }
+    
+    func setColorScheme() {
+        self.foaasView.backgroundColor = FoaasColorManager.shared.primary
     }
     
     func loadFoaas() {

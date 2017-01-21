@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -95,14 +94,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Cgh-a0-2vv" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" id="6Vt-EM-NXR"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="centerX" secondItem="tDN-Sc-jpY" secondAttribute="centerX" id="6os-Ri-qRu"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Cgh-a0-2vv" secondAttribute="bottom" constant="-100" id="MW0-nR-gKP"/>
-                            <constraint firstItem="Cgh-a0-2vv" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" multiplier="0.3" id="OO6-hh-aXZ"/>
+                            <constraint firstAttribute="bottom" secondItem="Cgh-a0-2vv" secondAttribute="bottom" constant="-100" id="JBn-TH-WPh"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="width" secondItem="tDN-Sc-jpY" secondAttribute="width" id="SiC-cH-PWz"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" id="f98-6v-DvR"/>
-                            <constraint firstAttribute="trailing" secondItem="Cgh-a0-2vv" secondAttribute="trailing" id="id9-Ow-VFu"/>
+                            <constraint firstItem="Cgh-a0-2vv" firstAttribute="height" secondItem="tDN-Sc-jpY" secondAttribute="height" multiplier="0.3" id="hox-8t-hQ0"/>
+                            <constraint firstAttribute="trailing" secondItem="Cgh-a0-2vv" secondAttribute="trailing" id="lN6-Jx-Obf"/>
                             <constraint firstItem="NT5-gP-1UJ" firstAttribute="centerY" secondItem="tDN-Sc-jpY" secondAttribute="centerY" id="lh2-wW-l8J"/>
-                            <constraint firstItem="Cgh-a0-2vv" firstAttribute="leading" secondItem="tDN-Sc-jpY" secondAttribute="leading" id="yNZ-5w-n8N"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="gJg-BO-eZe" appends="YES" id="bI9-A2-IG5"/>
@@ -114,7 +113,7 @@
                         <outlet property="foaasViewCenterYConstraint" destination="lh2-wW-l8J" id="2zy-E6-zw7"/>
                         <outlet property="messageTextLabel" destination="2lq-Kg-Ode" id="9Bk-0W-gYz"/>
                         <outlet property="settingsView" destination="Cgh-a0-2vv" id="MSb-Bc-7ou"/>
-                        <outlet property="settingsViewBaselineConstraint" destination="MW0-nR-gKP" id="VxA-I2-mBP"/>
+                        <outlet property="settingsViewBaselineConstraint" destination="JBn-TH-WPh" id="wpw-Fe-kAd"/>
                         <outlet property="subtitileTextLabel" destination="SO0-S2-EbH" id="XrY-QW-Qgl"/>
                     </connections>
                 </viewController>
@@ -351,6 +350,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backButton" destination="9pP-Nm-lTp" id="xFz-lz-Tgj"/>
+                        <outlet property="backgroundView" destination="SP0-2L-3hh" id="qFk-XV-98Y"/>
                         <outlet property="fromLabel" destination="LNw-s5-0NJ" id="hAo-dY-mea"/>
                         <outlet property="fromTextField" destination="lyk-t5-Yiy" id="CMk-Js-mdr"/>
                         <outlet property="nameLabel" destination="wIB-m2-JEx" id="vNv-oI-06T"/>
